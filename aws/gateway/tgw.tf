@@ -48,6 +48,7 @@ resource "aws_ram_resource_association" "tgw" {
   resource_share_arn = aws_ram_resource_share.main[0].arn
 }
 
+# share with specified principals
 resource "aws_ram_principal_association" "main" {
   count = length(var.shared_account_principals) > 0 ? length(var.shared_account_principals) : 0
   principal = var.shared_account_principals[count.index]
