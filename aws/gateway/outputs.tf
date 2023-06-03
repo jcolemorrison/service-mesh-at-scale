@@ -10,8 +10,5 @@ output "transit_gateway_cidr_block" {
 
 output "ram_resource_arns" {
   description = "Map of AWS Resource Access Manager IDs for the external accounts to use as a share accepter"
-  value = {
-    principal = aws_ram_resource_share.main[*].principal
-    arn = aws_ram_resource_share.main[*].arn
-  }
+  value = zipmap(aws_ram_resource_share.main[*].arn, aws_ram_principal_association.main[*].principal)
 }
