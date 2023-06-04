@@ -15,7 +15,7 @@ resource "hcp_aws_transit_gateway_attachment" "tgw" {
   hvn_id                        = hcp_hvn.hvn_service_mesh_at_scale.hvn_id
   transit_gateway_attachment_id = "hvn-tgw-attachment"
   transit_gateway_id            = aws_ec2_transit_gateway.main.id
-  resource_share_arn            = aws_ram_resource_share.main.arn
+  resource_share_arn            = aws_ram_resource_share.tgw.arn
 }
 
 
