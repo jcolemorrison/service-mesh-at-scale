@@ -1,10 +1,9 @@
 resource "hcp_hvn" "hvn_service_mesh_at_scale" {
-  hvn_id         = "hvn_service_mesh_at_scale"
+  hvn_id         = "hvn-service-mesh-at-scale"
   cloud_provider = "aws"
   region         = var.aws_default_region
   cidr_block     = var.hvn_cidr_block
   project_id     = var.hcp_project_id
-  organization_id = var.hcp_organization_id
 }
 
 resource "hcp_aws_transit_gateway_attachment" "tgw" {
