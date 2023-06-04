@@ -14,7 +14,7 @@ variable "aws_default_tags" {
 }
 
 variable "hvn_cidr_block" {
-  type = "string"
+  type = string
   default = "172.26.16.0/20"
 }
 
@@ -39,11 +39,11 @@ variable "spoke_vpc_cidrs" {
 ## Required
 
 variable "hcp_project_id" {
-  type = "string"
+  type = string
   description = "ID of the HCP project"
 }
 
 variable "hcp_organization_id" {
-  type = "string"
+  type = string
   description = "ID of the HCP organization"
 }
