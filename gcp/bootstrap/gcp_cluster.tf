@@ -5,10 +5,11 @@ resource "tfe_workspace" "gcp_cluster" {
   description               = "Workspace for Kubernetes cluster on Google Cloud"
   working_directory         = "gcp/cluster"
   queue_all_runs            = false
-  remote_state_consumer_ids = [tfe_workspace.gcp_services.id]
+  remote_state_consumer_ids = [tfe_workspace.gcp_services.id, tfe_workspace.gcp_consul.id]
   vcs_repo {
     github_app_installation_id = var.tfc_github_installation_id
     identifier                 = var.github_repository
+    branch                     = var.github_branch
   }
 }
 
