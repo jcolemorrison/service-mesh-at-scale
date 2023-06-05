@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.1.0"
     }
+    hcp = {
+      source  = "hashicorp/hcp"
+      version = "~> 0.59.0"
+    }
   }
 }
 
@@ -15,6 +19,7 @@ provider "aws" {
   }
 }
 
+provider "hcp" {}
 
 # Note: filter out wavelength zones if they're enabled in the account being deployed to.
 data "aws_availability_zones" "available" {

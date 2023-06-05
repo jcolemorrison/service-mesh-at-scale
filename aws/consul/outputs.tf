@@ -13,6 +13,11 @@ output "ram_resource_arns" {
   value = zipmap(aws_ram_principal_association.tgw[*].principal, aws_ram_resource_share.tgw[*].arn)
 }
 
+output "hcp_consul_cluster_id" {
+  description = "Cluster ID of the HCP Consul Cluster"
+  value = hcp_consul_cluster.smas.cluster_id
+}
+
 output "hcp_consul_root_token_secret_id" {
   description = "root token ID of the consul cluster needed in other ECS projects for ACL bootstrapping"
   value = hcp_consul_cluster.smas.consul_root_token_secret_id

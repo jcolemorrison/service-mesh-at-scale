@@ -37,3 +37,9 @@ variable "vpc_private_subnet_count" {
   description = "The number of private subnets to create.  Cannot exceed the number of AZs in your selected region."
   default     = 3
 }
+
+# HCP
+variable "hcp_consul_cluster_id" {
+  type = string
+  description = "ID of the HCP Consul Cluster"
+}
