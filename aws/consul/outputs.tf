@@ -13,35 +13,35 @@ output "ram_resource_arns" {
   value = zipmap(aws_ram_principal_association.tgw[*].principal, aws_ram_resource_share.tgw[*].arn)
 }
 
-output "hcp_consul_root_token_secret_id" {
-  description = "root token ID of the consul cluster needed in other ECS projects for ACL bootstrapping"
-  value = hcp_consul_cluster.smas.consul_root_token_secret_id
-  sensitive = true
-}
+# output "hcp_consul_root_token_secret_id" {
+#   description = "root token ID of the consul cluster needed in other ECS projects for ACL bootstrapping"
+#   value = hcp_consul_cluster.smas.consul_root_token_secret_id
+#   sensitive = true
+# }
 
-output "hcp_consul_gossip_key" {
-  description = "gossip key used by all clients"
-  value = jsondecode(base64decode(hcp_consul_cluster.smas.consul_config_file))["encrypt"]
-  sensitive = true
-}
+# output "hcp_consul_gossip_key" {
+#   description = "gossip key used by all clients"
+#   value = jsondecode(base64decode(hcp_consul_cluster.smas.consul_config_file))["encrypt"]
+#   sensitive = true
+# }
 
-output "hcp_consul_ca_file" {
-  description = "CA file used by consul clients for mtls.  comes base64 encoded"
-  value = hcp_consul_cluster.smas.consul_ca_file
-  sensitive = true
-}
+# output "hcp_consul_ca_file" {
+#   description = "CA file used by consul clients for mtls.  comes base64 encoded"
+#   value = hcp_consul_cluster.smas.consul_ca_file
+#   sensitive = true
+# }
 
-output "hcp_consul_public_endpoint" {
-  description = "public endpoint of the HCP consul cluster"
-  value = hcp_consul_cluster.smas.consul_public_endpoint_url
-}
+# output "hcp_consul_public_endpoint" {
+#   description = "public endpoint of the HCP consul cluster"
+#   value = hcp_consul_cluster.smas.consul_public_endpoint_url
+# }
 
-output "hcp_consul_private_endpoint" {
-  description = "private endpoint of the HCP consul cluster"
-  value = hcp_consul_cluster.smas.consul_private_endpoint_url
-}
+# output "hcp_consul_private_endpoint" {
+#   description = "private endpoint of the HCP consul cluster"
+#   value = hcp_consul_cluster.smas.consul_private_endpoint_url
+# }
 
-output "hcp_datacenter" {
-  description = "datacenter of the cluster"
-  value = hcp_consul_cluster.smas.datacenter
-}
+# output "hcp_datacenter" {
+#   description = "datacenter of the cluster"
+#   value = hcp_consul_cluster.smas.datacenter
+# }
