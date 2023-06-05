@@ -1,5 +1,13 @@
-# We strongly recommend using the required_providers block to set the
-# Azure Provider source and version being used
+terraform {
+  backend "remote" {
+    organization = "hashicorp-team-da-beta"
+
+    workspaces {
+      name = "azure-cluster"
+    }
+  }
+}
+
 terraform {
   required_providers {
     azurerm = {
@@ -10,6 +18,11 @@ terraform {
     hcp = {
       source  = "hashicorp/hcp"
       version = "0.59.0"
+    }
+
+    azuread = {
+      source = "hashicorp/azuread"
+      version = "2.39.0"
     }
   }
 }

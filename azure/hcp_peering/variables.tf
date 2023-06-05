@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 /*
  *
  * Required Variables
@@ -27,11 +30,6 @@ variable "subnet_ids" {
   description = "The subnets associated with the vnet"
 }
 
-variable "subnet_cidrs" {
-  type        = list(string)
-  description = "The cidr blocks for the subnets"
-}
-
 variable "vnet_id" {
   type        = string
   description = "the id of the vnet"
@@ -40,11 +38,6 @@ variable "vnet_id" {
 variable "vnet_rg" {
   type        = string
   description = "The name of the vnet's resource group that everything will be created in"
-}
-
-variable "region" {
-  type = string
-  description = "the region for the hvn"
 }
 
 /*

@@ -23,15 +23,13 @@ module "hcp_peering" {
   tenant_id       = data.azurerm_subscription.current.tenant_id
   subscription_id = data.azurerm_subscription.current.subscription_id
   hvn             = hcp_hvn.hvn
-  vnet_rg         = var.resource_group_name
+  vnet_rg         = azurerm_resource_group.rg.name
   vnet_id         = module.network.vnet_id
   subnet_ids      = module.network.vnet_subnets
-  subnet_cidrs    = var.vnet_cidrs
 
   # Optional
   security_group_names = [azurerm_network_security_group.nsg.name]
   prefix               = var.cluster_id
-  region = var.region
 }
 
 resource "hcp_consul_cluster" "main" {
