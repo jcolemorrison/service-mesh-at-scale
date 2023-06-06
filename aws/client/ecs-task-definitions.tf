@@ -63,11 +63,18 @@ module "client" {
   # https://github.com/hashicorp/consul-ecs/blob/main/config/schema.json#L74#
   # to tell the proxy and consul-ecs how to contact the service
   port = "9090" 
-
   tls = true
 
   # DNS to join consul on
   retry_join = jsondecode(base64decode(data.hcp_consul_cluster.aws.consul_config_file))["retry_join"]
+
+  # Admin Partitions
+  consul_partitions_enabled = true  
+  consul_partition = "client"
+  # consul_namespace = "" # hopefully puts it in the client partition's default namespace
+
+  # not 100 if this is required, but it's present in the other ecs tasks and services
+  additional_task_role_policies = [aws_iam_policy.execute_command.arn]
 
   depends_on = [
     module.consul_acl_controller

@@ -10,6 +10,10 @@ resource "aws_cloudwatch_log_group" "client_sidecars" {
   name_prefix = "${local.project_tag}-client-sidecars-"
 }
 
+resource "aws_cloudwatch_log_group" "mesh_gateway" {
+  name_prefix = "${local.project_tag}-client-sidecars-"
+}
+
 locals {
   acl_logs_configuration = {
     logDriver = "awslogs"
@@ -33,6 +37,14 @@ locals {
       awslogs-group         = aws_cloudwatch_log_group.client_sidecars.name
       awslogs-region        = var.aws_default_region
       awslogs-stream-prefix = "${local.project_tag}-client-sidecars-"
+    }
+  }
+  mesh_gateway_log_configuration = {
+    logDriver = "awslogs"
+    options = {
+      awslogs-group         = aws_cloudwatch_log_group.mesh_gateway.name
+      awslogs-region        = var.aws_default_region
+      awslogs-stream-prefix = "${local.project_tag}-mesh-gatway-"
     }
   }
 }
