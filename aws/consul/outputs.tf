@@ -55,3 +55,8 @@ output "hcp_datacenter" {
   description = "datacenter of the cluster"
   value = hcp_consul_cluster.aws.datacenter
 }
+
+output "hvn_id" {
+  description = "ID of the HCP HVN"
+  value = hcp_hvn.hvn_service_mesh_at_scale.id
+}
