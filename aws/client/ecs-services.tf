@@ -30,6 +30,8 @@ module "mesh_gateway" {
   source  = "hashicorp/consul-ecs/aws//modules/gateway-task"
   version = "0.6.0"
   family = "${local.project_tag}-mgw"
+  ecs_cluster_arn = aws_ecs_cluster.main.arn
+
   subnets = aws_subnet.private.*.id # where the mesh gateway exists
   security_groups = [aws_security_group.consul_client.id]
   log_configuration = local.mesh_gateway_log_configuration
