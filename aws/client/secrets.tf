@@ -13,7 +13,7 @@ resource "aws_secretsmanager_secret" "consul_bootstrap_token" {
 
 resource "aws_secretsmanager_secret_version" "consul_bootstrap_token" {
   secret_id     = aws_secretsmanager_secret.consul_bootstrap_token.id
-  secret_string = data.hcp_consul_cluster.aws.consul_root_token_secret_id
+  secret_string = var.consul_root_token_secret_id
 }
 
 resource "aws_secretsmanager_secret" "consul_root_ca_cert" {

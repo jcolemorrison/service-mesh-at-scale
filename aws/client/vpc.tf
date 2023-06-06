@@ -24,7 +24,7 @@ resource "aws_egress_only_internet_gateway" "eigw" {
 
 ## The NAT Elastic IP
 resource "aws_eip" "nat" {
-  vpc = true
+  domain = "vpc"
 
   tags = { "Name" = "${local.project_tag}-nat-eip" }
 

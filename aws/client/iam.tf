@@ -1,6 +1,6 @@
 // Policy that allows execution of remote commands in ECS tasks.
 resource "aws_iam_policy" "execute_command" {
-  name   = "${var.name}-ecs-execute-command"
+  name   = "${local.project_tag}-ecs-execute-command"
   path   = "/"
   policy = <<EOF
 {

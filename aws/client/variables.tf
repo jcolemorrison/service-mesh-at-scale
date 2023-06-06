@@ -53,3 +53,8 @@ variable "transit_gateway_id" {
   type = string
   description = "ID of the transit gateway used to connect all of the AWS service VPCs"
 }
+
+variable "consul_root_token_secret_id" {
+  type = string
+  description = "Root token secret ID needed for bootstrapping consul.  Retrieve this from the created HCP consul cluster in the consul project that is sibling to this one."
+}
