@@ -58,5 +58,10 @@ output "hcp_datacenter" {
 
 output "hvn_id" {
   description = "ID of the HCP HVN"
+  value = hcp_hvn.hvn_service_mesh_at_scale.hvn_id
+}
+
+output "hvn_id_id" {
+  description = "ID...ID of the HCP HVN"
   value = hcp_hvn.hvn_service_mesh_at_scale.id
 }
