@@ -12,7 +12,7 @@ module "consul_acl_controller" {
 
   consul_bootstrap_token_secret_arn = aws_secretsmanager_secret.consul_bootstrap_token.arn
   consul_server_ca_cert_arn         = aws_secretsmanager_secret.consul_root_ca_cert.arn
-  consul_server_http_addr = "https://${data.hcp_consul_cluster.smas.consul_private_endpoint_url}:8501"
+  consul_server_http_addr = "https://${data.hcp_consul_cluster.aws.consul_private_endpoint_url}:8501"
 
   # the ACL controller module creates the required IAM role to allow logging
   log_configuration = local.acl_logs_configuration

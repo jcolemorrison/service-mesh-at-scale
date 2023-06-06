@@ -47,14 +47,17 @@ module "client" {
   # All settings required by the mesh-task module
   acls = true
   enable_acl_token_replication = true
-  consul_http_addr             = "http://${data.hcp_consul_cluster.smas.consul_private_endpoint_url}:8500"
+  consul_http_addr             = "https://${data.hcp_consul_cluster.aws.consul_private_endpoint_url}:8501"
+
+  consul_datacenter = data.hcp_consul_cluster.aws.datacenter
+  consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter # required for mesh gateways?
 
   # really not sure how this is different from consul_server_ca_cert_arn...
   consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
+  consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
 
-  consul_datacenter = data.hcp_consul_cluster.smas.datacenter
-  consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn  
   gossip_key_secret_arn = aws_secretsmanager_secret.consul_gossip_key.arn
+
   log_configuration = local.client_sidecars_log_configuration
   
   # https://github.com/hashicorp/consul-ecs/blob/main/config/schema.json#L74#
@@ -64,7 +67,7 @@ module "client" {
   tls = true
 
   # DNS to join consul on
-  retry_join = jsondecode(base64decode(data.hcp_consul_cluster.smas.consul_config_file))["retry_join"]
+  retry_join = jsondecode(base64decode(data.hcp_consul_cluster.aws.consul_config_file))["retry_join"]
 
   depends_on = [
     module.consul_acl_controller
