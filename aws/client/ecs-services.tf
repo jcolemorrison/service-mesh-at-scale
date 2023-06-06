@@ -48,6 +48,7 @@ module "mesh_gateway" {
   acls = true
   consul_http_addr = "https://${data.hcp_consul_cluster.aws.consul_private_endpoint_url}:8501"
   consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
+  consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
 
   # for the network load balancer
   lb_enabled = true
