@@ -17,15 +17,15 @@ resource "aws_security_group_rule" "consul_client_allow_inbound_self_8301" {
 }
 
 # Allow inbound from HCP HVN
-resource "aws_security_group_rule" "consul_client_allow_inbound_HVN" {
-  security_group_id = aws_security_group.consul_client.id
-  type              = "ingress"
-  protocol          = "tcp"
-  cidr_blocks = [ data.hcp_hvn.aws.cidr_block ]
-  from_port         = 8500
-  to_port           = 8501
-  description       = "Allow HTTP(S) traffic from from the HCP HVN."
-}
+# resource "aws_security_group_rule" "consul_client_allow_inbound_HVN" {
+#   security_group_id = aws_security_group.consul_client.id
+#   type              = "ingress"
+#   protocol          = "tcp"
+#   cidr_blocks = [ data.hcp_hvn.aws.cidr_block ]
+#   from_port         = 8500
+#   to_port           = 8501
+#   description       = "Allow HTTP(S) traffic from from the HCP HVN."
+# }
 
 # Required to allow the proxies to contact each other
 resource "aws_security_group_rule" "consul_client_allow_inbound_self_20000" {
