@@ -69,7 +69,6 @@ module "client" {
   retry_join = jsondecode(base64decode(data.hcp_consul_cluster.aws.consul_config_file))["retry_join"]
 
   # Admin Partitions
-  consul_partitions_enabled = true  
   consul_partition = "client"
   # consul_namespace = "" # hopefully puts it in the client partition's default namespace
 
