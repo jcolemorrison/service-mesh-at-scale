@@ -12,7 +12,7 @@ module "consul_acl_controller" {
 
   consul_bootstrap_token_secret_arn = aws_secretsmanager_secret.consul_bootstrap_token.arn
   consul_server_ca_cert_arn         = aws_secretsmanager_secret.consul_root_ca_cert.arn
-  consul_server_http_addr = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
+  consul_server_http_addr = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}:8501"
 
   # the ACL controller module creates the required IAM role to allow logging
   log_configuration = local.acl_logs_configuration
@@ -46,7 +46,7 @@ module "mesh_gateway" {
   additional_task_role_policies = [aws_iam_policy.execute_command.arn]
 
   acls = true
-  consul_http_addr = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
+  consul_http_addr = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}:8501"
   consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
   consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
 
