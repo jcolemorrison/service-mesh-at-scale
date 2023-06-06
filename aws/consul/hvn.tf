@@ -23,7 +23,7 @@ resource "hcp_aws_transit_gateway_attachment" "tgw" {
 resource "hcp_hvn_route" "tgw" {
   count            = length(var.spoke_vpc_cidrs) > 0 ? length(var.spoke_vpc_cidrs) : 0
   hvn_link         = hcp_hvn.hvn_service_mesh_at_scale.self_link
-  hvn_route_id     = "hvn-to-tgw-attachment-${var.spoke_vpc_cidrs[count.index]}"
+  hvn_route_id     = "hvn-to-tgw-${count.index}"
   destination_cidr = var.spoke_vpc_cidrs[count.index]
   target_link      = hcp_aws_transit_gateway_attachment.tgw.self_link
   project_id = var.hcp_project_id
