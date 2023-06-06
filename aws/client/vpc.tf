@@ -126,3 +126,42 @@ resource "aws_route_table_association" "private" {
   subnet_id      = element(aws_subnet.private.*.id, count.index)
   route_table_id = aws_route_table.private.id
 }
+
+# Transit Gateway Attachment Configuration
+resource "aws_ec2_transit_gateway_vpc_attachment" "main" {
+  transit_gateway_id = var.transit_gateway_id
+  
+  # vpc to attach to our transit gateway
+  vpc_id = aws_vpc.main.id
+
+  # the ids of...the subnets the transit gateway will be made available to inside of the attached VPC
+  subnet_ids = aws_subnet.private.*.id
+
+  # can DNS be resolved across the transit gateway?  enabled so that load balancer DNS and service
+  # DNS can still be resolved.
+  dns_support = "enable"
+
+  # across traffic in the transit gateway...though since IPv6 is public by default, is this needed?
+  ipv6_support = "disable"
+
+  # whether or not to both associate and propagate routes from the VPC onto the transit gateway's
+  # default route table.
+  transit_gateway_default_route_table_association = true
+  transit_gateway_default_route_table_propagation = true
+
+  tags = { "Name" = "${local.project_tag}-tgw-attach-main" }
+}
+
+# Private routing table route attachment.  Any traffic destined for the HVN CIDR goes to the TGW.
+resource "aws_route" "private_hcp_access" {
+  route_table_id         = aws_route_table.private.id
+  destination_cidr_block = data.hcp_hvn.aws.cidr_block
+  transit_gateway_id = var.transit_gateway_id
+}
+
+# Public routing table route attachment.  Any traffic destined for the HVN CIDR goes to the TGW.
+resource "aws_route" "public_hcp_access" {
+  route_table_id         = aws_route_table.public.id
+  destination_cidr_block = data.hcp_hvn.aws.cidr_block
+  transit_gateway_id = var.transit_gateway_id
+}

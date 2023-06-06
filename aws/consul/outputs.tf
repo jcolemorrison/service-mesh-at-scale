@@ -18,6 +18,11 @@ output "hcp_consul_cluster_id" {
   value = hcp_consul_cluster.aws.cluster_id
 }
 
+output "hcp_consul_cluster_id_id" {
+  description = "Cluster ID...ID of the HCP Consul Cluster"
+  value = hcp_consul_cluster.aws.id
+}
+
 output "hcp_consul_root_token_secret_id" {
   description = "root token ID of the consul cluster needed in other ECS projects for ACL bootstrapping"
   value = hcp_consul_cluster.aws.consul_root_token_secret_id

@@ -38,8 +38,18 @@ variable "vpc_private_subnet_count" {
   default     = 3
 }
 
-# HCP
+# REQUIRED Variables
 variable "hcp_consul_cluster_id" {
   type = string
   description = "ID of the HCP Consul Cluster"
+}
+
+variable "hvn_id" {
+  type = string
+  description = "ID of the HCP HVN the HCP cluster is deployed into"
+}
+
+variable "transit_gateway_id" {
+  type = string
+  description = "ID of the transit gateway used to connect all of the AWS service VPCs"
 }
