@@ -18,12 +18,14 @@ resource "consul_config_entry" "exported_services" {
 
 resource "consul_config_entry" "exported_services_azure" {
   kind = "exported-services"
-  name = "default"
+  name = "azure-client"
+  partition = "default"
 
   config_json = jsonencode({
     Services = [
       {
         Name      = "service-mesh-client-client"
+        Namespace = "default"
         Consumers = [
             {
                 Peer  = "azure-default"
