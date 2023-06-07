@@ -50,6 +50,9 @@ module "mesh_gateway" {
   # consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
   consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
 
+  consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
+  consul_partition = "client"
+
   # for the network load balancer
   lb_enabled = true
   lb_subnets = aws_subnet.public.*.id

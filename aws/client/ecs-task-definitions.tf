@@ -71,6 +71,7 @@ module "client" {
   # Admin Partitions
   consul_partition = "client"
   consul_namespace = "default" # hopefully puts it in the client partition's default namespace
+  consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
 
   # not 100 if this is required, but it's present in the other ecs tasks and services
   additional_task_role_policies = [aws_iam_policy.execute_command.arn]
