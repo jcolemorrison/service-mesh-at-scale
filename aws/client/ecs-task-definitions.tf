@@ -53,7 +53,7 @@ module "client" {
   consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter # required for mesh gateways?
 
   # really not sure how this is different from consul_server_ca_cert_arn...
-  consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
+  # consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn # apparently not required on HCP
   consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
 
   gossip_key_secret_arn = aws_secretsmanager_secret.consul_gossip_key.arn
