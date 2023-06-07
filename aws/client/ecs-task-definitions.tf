@@ -49,8 +49,11 @@ module "client" {
       destinationName = "customers"
       destinationNamespace = "default"
       destinationPartition = "default"
-      datacenter = "gcp"
+      # datacenter = "gcp"
       localBindPort = 1234
+      meshGateways = {
+        mode = "local"
+      }
     }
   ]
 
