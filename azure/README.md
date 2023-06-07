@@ -28,3 +28,16 @@ Add admin permissions to create other service principals
 ```
 az ad app permission admin-consent --id=$(cat azure.json  | jq -r .appId)
 ```
+
+## SSH to Servers
+
+Export the key
+
+```
+terraform output -raw vm_ssh_key > vm.pem
+chmod 0400 ./vm.pem
+```
+
+```
+ssh ubuntu@$(terraform output -raw gateway_ip_address) -i vm.pem
+```

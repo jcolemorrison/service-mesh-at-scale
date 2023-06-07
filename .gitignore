@@ -7,3 +7,5 @@ gcp/consul.json
 terraform.tfstate
 terraform.tfstate.backup
 azure.json
+changeme
+vm.pem
