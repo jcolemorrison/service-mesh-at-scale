@@ -46,7 +46,7 @@ module "client" {
 
   upstreams = [
     {
-      destinationName = "shipping-azure"
+      destinationName = "loyalty"
       destinationNamespace = "default"
       destinationPartition = "default"
       localBindPort = 1234
