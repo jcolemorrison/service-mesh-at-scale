@@ -32,3 +32,13 @@ variable "vnet_subnets" {
     "subnet3" = "10.0.3.0/24",
   }
 }
+
+variable "peer_datacenter" {
+  default = "aws"
+  description = "The datacenter for exported services"
+}
+
+variable "peer_partition" {
+  default = "default"
+  description = "The partition for exported services"
+}
