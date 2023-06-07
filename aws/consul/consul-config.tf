@@ -18,7 +18,7 @@ resource "consul_config_entry" "exported_services" {
 
 resource "consul_config_entry" "exported_services_azure" {
   kind = "exported-services"
-  name = "azure-client"
+  name = "default"
   partition = "default"
 
   config_json = jsonencode({
