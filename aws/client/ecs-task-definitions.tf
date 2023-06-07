@@ -36,11 +36,21 @@ module "client" {
           name = "MESSAGE" # Fake Service message to return
           value = "Hello from the client!"
         },
-        # {
-        #   name = "UPSTREAM_URIS" # Fake service upstream service to call to
-        #   value = "" # point all upstreams to the proxy
-        # }
+        {
+          name = "UPSTREAM_URIS" # Fake service upstream service to call to
+          value = "http://localhost:1234" # point all upstreams to the proxy
+        }
       ]
+    }
+  ]
+
+  upstreams = [
+    {
+      destinationName = "customers"
+      destinationNamespace = "default"
+      destinationPartition = "default"
+      datacenter = "gcp"
+      localBindPort = 1234
     }
   ]
 
