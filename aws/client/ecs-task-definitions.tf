@@ -46,7 +46,7 @@ module "client" {
 
   upstreams = [
     {
-      destinationName = "shipping"
+      destinationName = "shipping-azure"
       destinationNamespace = "default"
       destinationPartition = "default"
       localBindPort = 1234
@@ -56,9 +56,9 @@ module "client" {
     }
   ]
 
-  meshGateway = {
-    mode = "local"
-  }
+  # meshGateway = {
+  #   mode = "local"
+  # }
 
   # All settings required by the mesh-task module
   acls = true
