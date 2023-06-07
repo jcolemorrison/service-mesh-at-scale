@@ -51,7 +51,7 @@ module "client" {
       destinationPartition = "default"
       # datacenter = "gcp"
       localBindPort = 1234
-      meshGateways = {
+      meshGateway = {
         mode = "local"
       }
     }
