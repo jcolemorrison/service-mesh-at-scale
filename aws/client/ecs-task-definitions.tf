@@ -59,8 +59,8 @@ module "client" {
   upstreams = [
     {
       destinationName = "test"
-      destinationNamespace = "default"
-      destinationPartition = "default"
+      # destinationNamespace = "default"
+      # destinationPartition = "default"
       localBindPort = 1234
       # meshGateway = {
       #   mode = "local"
@@ -97,8 +97,8 @@ module "client" {
   retry_join = jsondecode(base64decode(data.hcp_consul_cluster.aws.consul_config_file))["retry_join"]
 
   # Admin Partitions
-  consul_partition = "default"
-  consul_namespace = "default" # hopefully puts it in the client partition's default namespace
+  # consul_partition = "default"
+  # consul_namespace = "default" # hopefully puts it in the client partition's default namespace
   consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
 
   # not 100 if this is required, but it's present in the other ecs tasks and services
@@ -196,8 +196,8 @@ module "test" {
   retry_join = jsondecode(base64decode(data.hcp_consul_cluster.aws.consul_config_file))["retry_join"]
 
   # Admin Partitions
-  consul_partition = "default"
-  consul_namespace = "default" # hopefully puts it in the client partition's default namespace
+  # consul_partition = "default"
+  # consul_namespace = "default" # hopefully puts it in the client partition's default namespace
   consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
 
   # not 100 if this is required, but it's present in the other ecs tasks and services

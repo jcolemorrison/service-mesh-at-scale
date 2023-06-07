@@ -18,8 +18,8 @@ module "consul_acl_controller" {
   log_configuration = local.acl_logs_configuration
 
   # Admin Partitions
-  consul_partitions_enabled = true  
-  consul_partition = "default"
+  # consul_partitions_enabled = true  
+  # consul_partition = "default"
 
   depends_on = [
     aws_nat_gateway.nat,
@@ -51,7 +51,7 @@ module "mesh_gateway" {
   consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
 
   consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
-  consul_partition = "default"
+  # consul_partition = "default"
 
   # for the network load balancer
   lb_enabled = true
