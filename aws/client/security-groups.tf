@@ -27,7 +27,7 @@ resource "aws_security_group_rule" "consul_client_allow_inbound_HCP_8301_tcp" {
   description       = "Allow TCP traffic from HCP with this security group."
 }
 
-resource "aws_security_group_rule" "consul_client_allow_inbound_HCP_8301_tcp" {
+resource "aws_security_group_rule" "consul_client_allow_inbound_HCP_8301_udp" {
   security_group_id = aws_security_group.consul_client.id
   type              = "ingress"
   protocol          = "udp"
