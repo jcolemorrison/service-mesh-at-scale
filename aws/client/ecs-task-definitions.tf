@@ -47,7 +47,7 @@ module "client" {
   # All settings required by the mesh-task module
   acls = true
   enable_acl_token_replication = true
-  consul_http_addr             = "http://aws.private.consul.292e39b5-68d5-466c-a083-5eb1fe71a5ef.aws.hashicorp.cloud:8500"
+  consul_http_addr             = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}:8501"
 
   consul_datacenter = data.hcp_consul_cluster.aws.datacenter
   consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter # required for mesh gateways?
