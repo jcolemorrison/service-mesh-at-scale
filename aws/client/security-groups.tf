@@ -16,6 +16,18 @@ resource "aws_security_group_rule" "consul_client_allow_inbound_self_8301" {
   description       = "Allow LAN Serf traffic from resources with this security group."
 }
 
+# Required for gossip traffic from clients to HCP HVN
+resource "aws_security_group_rule" "consul_client_allow_inbound_HCP_8301" {
+  security_group_id = aws_security_group.consul_client.id
+  type              = "ingress"
+  protocol          = "tcp"
+  cidr_blocks = [ data.hcp_hvn.aws.cidr_block ]
+  from_port         = 8301
+  to_port           = 8301
+  description       = "Allow LAN Serf traffic from resources with this security group."
+}
+
+
 # Allow inbound from HCP HVN
 # resource "aws_security_group_rule" "consul_client_allow_inbound_HVN" {
 #   security_group_id = aws_security_group.consul_client.id
