@@ -22,8 +22,8 @@ resource "aws_security_group_rule" "consul_client_allow_inbound_HCP_8301_tcp" {
   type              = "ingress"
   protocol          = "tcp"
   cidr_blocks = [ data.hcp_hvn.aws.cidr_block ]
-  from_port         = 8301
-  to_port           = 8301
+  from_port         = 0
+  to_port           = 65535
   description       = "Allow TCP traffic from HCP with this security group."
 }
 
@@ -32,8 +32,8 @@ resource "aws_security_group_rule" "consul_client_allow_inbound_HCP_8301_udp" {
   type              = "ingress"
   protocol          = "udp"
   cidr_blocks = [ data.hcp_hvn.aws.cidr_block ]
-  from_port         = 8301
-  to_port           = 8301
+  from_port         = 0
+  to_port           = 65535
   description       = "Allow UDP traffic from HCP with this security group."
 }
 
