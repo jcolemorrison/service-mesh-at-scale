@@ -46,7 +46,7 @@ module "client" {
 
   # All settings required by the mesh-task module
   acls = true
-  enable_acl_token_replication = true
+  # enable_acl_token_replication = true
   consul_http_addr             = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
 
   consul_datacenter = data.hcp_consul_cluster.aws.datacenter
