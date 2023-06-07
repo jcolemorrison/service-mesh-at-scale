@@ -31,20 +31,6 @@ resource "kubernetes_manifest" "service_loyalty" {
   }
 }
 
-resource "kubernetes_manifest" "servicedefaults_loyalty" {
-  manifest = {
-    "apiVersion" = "consul.hashicorp.com/v1alpha1"
-    "kind"       = "ServiceDefaults"
-    "metadata" = {
-      "name"      = "loyalty"
-      "namespace" = "default"
-    }
-    "spec" = {
-      "protocol" = "http"
-    }
-  }
-}
-
 resource "kubernetes_manifest" "deployment_loyalty" {
   manifest = {
     "apiVersion" = "apps/v1"

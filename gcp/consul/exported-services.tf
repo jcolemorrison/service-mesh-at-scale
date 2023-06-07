@@ -4,13 +4,13 @@ resource "consul_config_entry" "exported_services" {
 
   config_json = jsonencode({
     Services = [{
-      Name = "catalog"
+      Name = "coffee-catalog"
       Consumers = [{
         Peer = "${var.peer_datacenter}-${var.peer_partition}"
       }]
       },
       {
-        Name = "customers"
+        Name = "coffee-customers"
         Consumers = [{
           Peer = "${var.peer_datacenter}-${var.peer_partition}"
         }]

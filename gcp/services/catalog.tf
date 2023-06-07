@@ -3,7 +3,7 @@ resource "kubernetes_manifest" "serviceaccount_catalog" {
     "apiVersion" = "v1"
     "kind"       = "ServiceAccount"
     "metadata" = {
-      "name"      = "catalog"
+      "name"      = "coffee-catalog"
       "namespace" = "default"
     }
   }
@@ -14,7 +14,7 @@ resource "kubernetes_manifest" "service_catalog" {
     "apiVersion" = "v1"
     "kind"       = "Service"
     "metadata" = {
-      "name"      = "catalog"
+      "name"      = "coffee-catalog"
       "namespace" = "default"
     }
     "spec" = {
@@ -25,22 +25,8 @@ resource "kubernetes_manifest" "service_catalog" {
         },
       ]
       "selector" = {
-        "app" = "catalog"
+        "app" = "coffee-catalog"
       }
-    }
-  }
-}
-
-resource "kubernetes_manifest" "servicedefaults_catalog" {
-  manifest = {
-    "apiVersion" = "consul.hashicorp.com/v1alpha1"
-    "kind"       = "ServiceDefaults"
-    "metadata" = {
-      "name"      = "catalog"
-      "namespace" = "default"
-    }
-    "spec" = {
-      "protocol" = "http"
     }
   }
 }
@@ -51,16 +37,16 @@ resource "kubernetes_manifest" "deployment_catalog" {
     "kind"       = "Deployment"
     "metadata" = {
       "labels" = {
-        "app" = "catalog"
+        "app" = "coffee-catalog"
       }
-      "name"      = "catalog"
+      "name"      = "coffee-catalog"
       "namespace" = "default"
     }
     "spec" = {
       "replicas" = 1
       "selector" = {
         "matchLabels" = {
-          "app" = "catalog"
+          "app" = "coffee-catalog"
         }
       }
       "template" = {
@@ -69,7 +55,7 @@ resource "kubernetes_manifest" "deployment_catalog" {
             "consul.hashicorp.com/connect-inject" = "true"
           }
           "labels" = {
-            "app" = "catalog"
+            "app" = "coffee-catalog"
           }
         }
         "spec" = {
@@ -90,7 +76,7 @@ resource "kubernetes_manifest" "deployment_catalog" {
                 }
               ]
               "image" = "nicholasjackson/fake-service:v0.25.1"
-              "name"  = "catalog"
+              "name"  = "coffee-catalog"
               "ports" = [
                 {
                   "containerPort" = 9091
@@ -98,7 +84,7 @@ resource "kubernetes_manifest" "deployment_catalog" {
               ]
             },
           ]
-          "serviceAccountName" = "catalog"
+          "serviceAccountName" = "coffee-catalog"
         }
       }
     }

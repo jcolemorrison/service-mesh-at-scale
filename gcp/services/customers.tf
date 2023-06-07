@@ -3,7 +3,7 @@ resource "kubernetes_manifest" "serviceaccount_customers" {
     "apiVersion" = "v1"
     "kind"       = "ServiceAccount"
     "metadata" = {
-      "name"      = "customers"
+      "name"      = "coffee-customers"
       "namespace" = "default"
     }
   }
@@ -14,7 +14,7 @@ resource "kubernetes_manifest" "service_customers" {
     "apiVersion" = "v1"
     "kind"       = "Service"
     "metadata" = {
-      "name"      = "customers"
+      "name"      = "coffee-customers"
       "namespace" = "default"
     }
     "spec" = {
@@ -25,22 +25,8 @@ resource "kubernetes_manifest" "service_customers" {
         },
       ]
       "selector" = {
-        "app" = "customers"
+        "app" = "coffee-customers"
       }
-    }
-  }
-}
-
-resource "kubernetes_manifest" "servicedefaults_customers" {
-  manifest = {
-    "apiVersion" = "consul.hashicorp.com/v1alpha1"
-    "kind"       = "ServiceDefaults"
-    "metadata" = {
-      "name"      = "customers"
-      "namespace" = "default"
-    }
-    "spec" = {
-      "protocol" = "http"
     }
   }
 }
@@ -51,16 +37,16 @@ resource "kubernetes_manifest" "deployment_customers" {
     "kind"       = "Deployment"
     "metadata" = {
       "labels" = {
-        "app" = "customers"
+        "app" = "coffee-customers"
       }
-      "name"      = "customers"
+      "name"      = "coffee-customers"
       "namespace" = "default"
     }
     "spec" = {
       "replicas" = 1
       "selector" = {
         "matchLabels" = {
-          "app" = "customers"
+          "app" = "coffee-customers"
         }
       }
       "template" = {
@@ -69,7 +55,7 @@ resource "kubernetes_manifest" "deployment_customers" {
             "consul.hashicorp.com/connect-inject" = "true"
           }
           "labels" = {
-            "app" = "customers"
+            "app" = "coffee-customers"
           }
         }
         "spec" = {
@@ -90,7 +76,7 @@ resource "kubernetes_manifest" "deployment_customers" {
                 }
               ]
               "image" = "nicholasjackson/fake-service:v0.25.1"
-              "name"  = "customers"
+              "name"  = "coffee-customers"
               "ports" = [
                 {
                   "containerPort" = 9091
@@ -98,7 +84,7 @@ resource "kubernetes_manifest" "deployment_customers" {
               ]
             },
           ]
-          "serviceAccountName" = "customers"
+          "serviceAccountName" = "coffee-customers"
         }
       }
     }
