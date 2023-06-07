@@ -36,25 +36,25 @@ module "client" {
           name = "MESSAGE" # Fake Service message to return
           value = "Hello from the client!"
         },
-        {
-          name = "UPSTREAM_URIS" # Fake service upstream service to call to
-          value = "http://localhost:1234" # point all upstreams to the proxy
-        }
+        # {
+        #   name = "UPSTREAM_URIS" # Fake service upstream service to call to
+        #   value = "http://localhost:1234" # point all upstreams to the proxy
+        # }
       ]
     }
   ]
 
-  upstreams = [
-    {
-      destinationName = "loyalty"
-      destinationNamespace = "default"
-      destinationPartition = "default"
-      localBindPort = 1234
-      meshGateway = {
-        mode = "local"
-      }
-    }
-  ]
+  # upstreams = [
+  #   {
+  #     destinationName = "loyalty"
+  #     destinationNamespace = "default"
+  #     destinationPartition = "default"
+  #     localBindPort = 1234
+  #     meshGateway = {
+  #       mode = "local"
+  #     }
+  #   }
+  # ]
 
   # meshGateway = {
   #   mode = "local"
