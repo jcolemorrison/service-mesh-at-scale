@@ -9,7 +9,7 @@ resource "consul_config_entry" "service_intentions_customers" {
         Name       = "customers"
         Precedence = 9
         Type       = "consul"
-        Peer       = "aws"
+        Peer       = "${var.peer_datacenter}-${var.peer_partition}"
       }
     ]
   })
@@ -26,7 +26,7 @@ resource "consul_config_entry" "service_intentions_catalog" {
         Name       = "catalog"
         Precedence = 9
         Type       = "consul"
-        Peer       = "aws"
+        Peer       = "${var.peer_datacenter}-${var.peer_partition}"
       }
     ]
   })
@@ -43,7 +43,7 @@ resource "consul_config_entry" "service_intentions_loyalty" {
         Name       = "ui"
         Precedence = 9
         Type       = "consul"
-        Peer       = "aws"
+        Peer       = "${var.peer_datacenter}-${var.peer_partition}"
       }
     ]
   })

@@ -6,19 +6,19 @@ resource "consul_config_entry" "exported_services" {
     Services = [{
       Name = "catalog"
       Consumers = [{
-        Peer = "aws-client"
+        Peer = "${var.peer_datacenter}-${var.peer_partition}"
       }]
       },
       {
         Name = "customers"
         Consumers = [{
-          Peer = "aws-client"
+          Peer = "${var.peer_datacenter}-${var.peer_partition}"
         }]
       },
       {
         Name = "loyalty"
         Consumers = [{
-          Peer = "aws-client"
+          Peer = "${var.peer_datacenter}-${var.peer_partition}"
         }]
     }]
   })
