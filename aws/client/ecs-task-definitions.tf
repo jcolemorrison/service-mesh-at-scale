@@ -59,12 +59,12 @@ module "client" {
   upstreams = [
     {
       destinationName = "test"
-      destinationNamespace = "default"
-      destinationPartition = "default"
+      # destinationNamespace = "default"
+      # destinationPartition = "default"
       localBindPort = 1234
-      meshGateway = {
-        mode = "local"
-      }
+      # meshGateway = {
+      #   mode = "local"
+      # }
     }
   ]
 
