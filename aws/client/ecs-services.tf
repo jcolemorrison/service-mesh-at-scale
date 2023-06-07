@@ -11,7 +11,7 @@ module "consul_acl_controller" {
   subnets = aws_subnet.private.*.id
 
   consul_bootstrap_token_secret_arn = aws_secretsmanager_secret.consul_bootstrap_token.arn
-  consul_server_ca_cert_arn         = aws_secretsmanager_secret.consul_root_ca_cert.arn
+  # consul_server_ca_cert_arn         = aws_secretsmanager_secret.consul_root_ca_cert.arn # apparently not required with HCP...
   consul_server_http_addr = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
 
   # the ACL controller module creates the required IAM role to allow logging
