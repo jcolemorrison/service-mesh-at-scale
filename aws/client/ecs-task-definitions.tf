@@ -49,7 +49,7 @@ module "client" {
       destinationName = "shipping"
       destinationNamespace = "default"
       destinationPartition = "default"
-      # datacenter = "gcp"
+      datacenter = "azure"
       localBindPort = 1234
       meshGateway = {
         mode = "local"
