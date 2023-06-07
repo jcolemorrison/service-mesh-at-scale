@@ -10,6 +10,13 @@ resource "consul_config_entry" "service_intentions_customers" {
         Precedence = 9
         Type       = "consul"
         Peer       = "${var.peer_datacenter}-${var.peer_partition}"
+      },
+      {
+        Action     = "allow"
+        Name       = "client"
+        Precedence = 9
+        Type       = "consul"
+        Peer       = "${var.peer_datacenter}-${var.peer_partition}"
       }
     ]
   })
