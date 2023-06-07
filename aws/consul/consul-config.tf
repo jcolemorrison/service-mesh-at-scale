@@ -26,7 +26,7 @@ resource "consul_config_entry" "exported_services_azure" {
         Name      = "client"
         Consumers = [
             {
-                Peer  = "gcp-default"
+                Peer  = "azure-default"
             },
         ]
       }
