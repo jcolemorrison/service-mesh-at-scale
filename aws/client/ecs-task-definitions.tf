@@ -49,13 +49,16 @@ module "client" {
       destinationName = "shipping"
       destinationNamespace = "default"
       destinationPartition = "default"
-      datacenter = "azure"
       localBindPort = 1234
       meshGateway = {
         mode = "local"
       }
     }
   ]
+
+  meshGateway = {
+    mode = "local"
+  }
 
   # All settings required by the mesh-task module
   acls = true
