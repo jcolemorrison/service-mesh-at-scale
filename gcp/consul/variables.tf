@@ -22,5 +22,5 @@ variable "peer_datacenter" {
 variable "peer_partition" {
   type        = string
   description = "Partition in peered cluster to access"
-  default     = "client"
+  default     = "default"
 }
