@@ -66,7 +66,7 @@ module "client" {
   tls = true
 
   # DNS to join consul on
-  retry_join = ["${jsondecode(base64decode(data.hcp_consul_cluster.aws.consul_config_file))["retry_join"][0]}:443"]
+  retry_join = jsondecode(base64decode(data.hcp_consul_cluster.aws.consul_config_file))["retry_join"][0]
 
   # Admin Partitions
   consul_partition = "client"
