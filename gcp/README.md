@@ -2,21 +2,43 @@
 
 ## Prerequisites
 
-1. Create a GCP project
+1. Create a GCP project.
 
-1. Enable the following APIs for the project:
-   - Service Usage API
-   - Kubernetes Engine API
-   - IAM Service Account Credentials API
+   1. Enable the following APIs for the project:
+      - Service Usage API
+      - Kubernetes Engine API
+      - IAM Service Account Credentials API
 
-1. Create a service account for Terraform with the following
-   roles:
-   - Editor
-   - Kubernetes Engine Admin
+   1. Create a service account for Terraform with the following
+      roles:
+      - Editor
+      - Kubernetes Engine Admin
 
-1. Create an HCP account
+1. Create an HCP account.
+
+1. Create a Terraform Cloud organization.
 
 1. Download [consul-k8s](https://github.com/hashicorp/consul-k8s/tree/main#cli).
+
+## Bootstrap TFC Workspaces
+
+Go to `gcp/bootstrap`.
+
+Define all required variables in `terraform.auto.tfvars`.
+
+Run `terraform init`.
+
+Run `terraform apply`.
+
+This creates a set of three workspaces:
+
+1. cluster
+1. services
+1. consul
+
+And a variable set for GCP credentials that applies to all three workspaces.
+It also sets up VCS connections within each workspaces to point to the working
+directory of your fork.
 
 ## Create GKE cluster
 
@@ -68,3 +90,13 @@
 1. Navigate to the HCP Consul dashboard to examine your self-managed cluster.
    If you want to access the Consul cluster, you can retrieve the address
    and token from `consul.json`.
+
+## Deploy services to GKE Cluster
+
+After deploying Consul, use Terraform to deploy
+the services under `gcp/services`.
+
+## Configure services for Consul
+
+Configure the services to connect to other services in peers.
+Use Terraform to apply the configuration under `gcp/consul`.

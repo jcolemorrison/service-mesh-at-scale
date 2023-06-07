@@ -20,6 +20,7 @@ fi
 consul-k8s install -preset cloud \
    -hcp-resource-id ${HCP_RESOURCE_ID} \
    -set=global.peering.enabled=true \
+   -set=global.image="consul:1.15.3" \
    -set=meshGateway.enabled=true \
    -set=ui.service.type=LoadBalancer
 
