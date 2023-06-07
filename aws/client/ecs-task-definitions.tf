@@ -122,7 +122,7 @@ module "test" {
 
   container_definitions = [
     {
-      name = "client"
+      name = "test"
       image = "nicholasjackson/fake-service:v0.25.1"
       cpu = 0 # take up proportional cpu
       essential = true
