@@ -1,6 +1,6 @@
 resource "consul_config_entry" "exported_services" {
-  Kind = "exported-services"
-  Name = "default"
+  kind = "exported-services"
+  name = "default"
 
   config_json = jsonencode({
     Services = [
