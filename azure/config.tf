@@ -23,3 +23,43 @@ resource "consul_config_entry" "exported_services" {
     }]
   })
 }
+
+resource "consul_config_entry" "exported_services_gcp" {
+  name = "default"
+  kind = "exported-services"
+
+  config_json = jsonencode({
+    Services = [{
+      Name = "tea-catalog"
+      Consumers = [{
+        Peer = "gcp-${var.peer_partition}"
+      }]
+      },
+      {
+        Name = "tea-customers"
+        Consumers = [{
+          Peer = "gcp-${var.peer_partition}"
+        }]
+      },
+      {
+        Name = "shipping"
+        Consumers = [{
+          Peer = "gcp-${var.peer_partition}"
+        }]
+    }]
+  })
+}
+
+
+resource "consul_config_entry" "loyalty_intention" {
+  name = "shipping"
+  kind = "service-intentions"
+
+  config_json = jsonencode({
+    Sources = [{
+    Name = "loyalty"
+    Peer = "gcp"
+    Action = "allow"
+    }]
+  })
+}
