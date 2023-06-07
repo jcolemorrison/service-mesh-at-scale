@@ -46,7 +46,7 @@ module "client" {
 
   upstreams = [
     {
-      destinationName = "customers"
+      destinationName = "shipping"
       destinationNamespace = "default"
       destinationPartition = "default"
       # datacenter = "gcp"

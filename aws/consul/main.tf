@@ -25,7 +25,9 @@ provider "aws" {
 
 provider "hcp" {}
 
-provider "consul" {}
+provider "consul" {
+  scheme = "https"
+}
 
 # Note: filter out wavelength zones if they're enabled in the account being deployed to.
 data "aws_availability_zones" "available" {
