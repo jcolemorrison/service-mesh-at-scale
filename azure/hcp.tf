@@ -37,6 +37,7 @@ resource "hcp_consul_cluster" "main" {
   hvn_id          = hcp_hvn.hvn.hvn_id
   public_endpoint = true
   tier            = "development"
+  size            = "x_small"
 }
 
 resource "hcp_consul_cluster_root_token" "token" {
