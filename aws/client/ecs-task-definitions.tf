@@ -52,7 +52,8 @@ module "client" {
     {
       destinationName = "shipping"
       destinationNamespace = "default"
-      destinationPartition = "azure-default"
+      destinationPartition = "default"
+      datacenter = "azure"
       localBindPort = 1235
       meshGateway = {
         mode = "local"
