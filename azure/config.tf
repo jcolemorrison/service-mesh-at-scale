@@ -3,34 +3,40 @@ resource "consul_config_entry" "exported_services" {
   kind = "exported-services"
 
   config_json = jsonencode({
-    Services = [{
+    Services = [
+    {
       Name = "tea-catalog"
       Consumers = [{
         Peer = "${var.peer_datacenter}-${var.peer_partition}"
       },{
+          Peer = "gcp-${var.peer_partition}"
+      }]
+    },
+    {
+      Name = "tea-customers"
+      Consumers = [{
+        Peer = "${var.peer_datacenter}-${var.peer_partition}"
+      },{
+        Peer = "gcp-${var.peer_partition}"
+      }]
+    },
+    {
+      Name = "shipping"
+      Consumers = [{
+        Peer = "${var.peer_datacenter}-${var.peer_partition}"
+      },
+      {
         Peer = "gcp-${var.peer_partition}"
       }
       ]
-      },
-      {
-        Name = "tea-customers"
-        Consumers = [{
-          Peer = "${var.peer_datacenter}-${var.peer_partition}"
-        },{
-          Peer = "gcp-${var.peer_partition}"
-        }
-      ]
-      },
-      {
-        Name = "shipping"
-        Consumers = [{
-          Peer = "${var.peer_datacenter}-${var.peer_partition}"
-        },
-        {
-          Peer = "gcp-${var.peer_partition}"
-        }
-        ]
-    }]
+    },
+    {
+      Name = "mesh-gateway"
+      Consumers = [{
+        Peer = "${var.peer_datacenter}-${var.peer_partition}"
+      }]
+    }
+    ]
   })
 }
 

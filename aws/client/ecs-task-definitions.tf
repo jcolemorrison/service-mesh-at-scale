@@ -48,6 +48,9 @@ module "client" {
     {
       destinationName = "test"
       localBindPort = 1234
+        meshGateway = {
+          mode = "local"
+        }
     }
   ]
 

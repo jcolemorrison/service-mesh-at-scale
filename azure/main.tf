@@ -1,9 +1,9 @@
 terraform {
   backend "remote" {
-    organization = "hashicorp-team-da-beta"
+    organization = "hashicorp-team-demo"
 
     workspaces {
-      name = "azure-cluster"
+      name = "service-mesh-at-scale-azure"
     }
   }
 }
