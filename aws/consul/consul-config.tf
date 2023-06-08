@@ -9,3 +9,15 @@ resource "consul_config_entry" "shipping_azure" {
     }
   })
 }
+
+resource "consul_config_entry" "loyalty" {
+  kind = "service-resolver"
+  name = "loyalty-gcp"
+
+  config_json = jsonencode({
+    Redirect = {
+      Service = "loyalty"
+      Peer = "gcp-default"
+    }
+  })
+}
