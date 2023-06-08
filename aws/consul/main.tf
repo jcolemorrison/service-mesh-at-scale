@@ -9,6 +9,10 @@ terraform {
       source  = "hashicorp/hcp"
       version = "~> 0.59.0"
     }
+    consul = {
+      source = "hashicorp/consul"
+      version = "~> 2.17.0"
+    }
   }
 }
 
@@ -21,6 +25,9 @@ provider "aws" {
 
 provider "hcp" {}
 
+provider "consul" {
+  scheme = "https"
+}
 
 # Note: filter out wavelength zones if they're enabled in the account being deployed to.
 data "aws_availability_zones" "available" {

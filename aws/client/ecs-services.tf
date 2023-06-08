@@ -19,7 +19,7 @@ module "consul_acl_controller" {
 
   # Admin Partitions
   consul_partitions_enabled = true  
-  consul_partition = "client"
+  consul_partition = "default"
 
   depends_on = [
     aws_nat_gateway.nat,
@@ -49,6 +49,9 @@ module "mesh_gateway" {
   consul_http_addr = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
   # consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
   consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
+
+  consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
+  consul_partition = "default"
 
   # for the network load balancer
   lb_enabled = true
@@ -84,3 +87,26 @@ resource "aws_ecs_service" "client" {
 
   propagate_tags = "TASK_DEFINITION"
 }
+
+# User Facing Test Service
+# resource "aws_ecs_service" "test" {
+#   name = "${local.project_tag}-test"
+#   cluster = aws_ecs_cluster.main.arn
+#   task_definition = module.test.task_definition_arn
+#   desired_count = 1
+#   launch_type = "FARGATE"
+
+#   # this is only required if a service linked role for ECS isn't present in your account
+#   # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+#   # iam_role = aws_iam_role.service_linked_ecs_role.arn
+
+#   network_configuration {
+#     subnets = aws_subnet.private.*.id
+#     # defaults to the default VPC security group which allows all traffic from itself and all outbound traffic
+#     # instead, we define our own for each ECS service!
+#     security_groups = [aws_security_group.ecs_client_service.id, aws_security_group.consul_client.id]
+#     assign_public_ip = false
+#   }
+
+#   propagate_tags = "TASK_DEFINITION"
+# }
