@@ -68,7 +68,7 @@ resource "kubernetes_manifest" "deployment_loyalty" {
                 },
                 {
                   "name"  = "NAME"
-                  "value" = "loyalty"
+                  "value" = "loyalty-GCP"
                 },
                 {
                   "name"  = "MESSAGE"
