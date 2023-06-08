@@ -29,7 +29,7 @@ module "consul_acl_controller" {
 module "mesh_gateway" {
   source  = "hashicorp/consul-ecs/aws//modules/gateway-task"
   version = "0.6.0"
-  family = "${local.project_tag}-mgw"
+  family = "aws-mesh-gateway"
   ecs_cluster_arn = aws_ecs_cluster.main.arn
 
   subnets = aws_subnet.private.*.id # where the mesh gateway exists
@@ -61,7 +61,7 @@ module "mesh_gateway" {
 
 # User Facing Client Service
 resource "aws_ecs_service" "client" {
-  name = "${local.project_tag}-client"
+  name = "client"
   cluster = aws_ecs_cluster.main.arn
   task_definition = module.client.task_definition_arn
   desired_count = 1
