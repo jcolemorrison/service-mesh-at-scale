@@ -12,7 +12,7 @@ module "client" {
   container_definitions = [
     {
       name = "client"
-      image = "nicholasjackson/fake-service:v0.25.1"
+      image = "ghcr.io/nicholasjackson/fake-service:v0.25.2"
       cpu = 0 # take up proportional cpu
       essential = true
 
