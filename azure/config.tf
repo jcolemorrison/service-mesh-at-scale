@@ -30,12 +30,12 @@ resource "consul_config_entry" "exported_services" {
       }
       ]
     },
-    {
-      Name = "mesh-gateway"
-      Consumers = [{
-        Peer = "${var.peer_datacenter}-${var.peer_partition}"
-      }]
-    }
+    # {
+    #   Name = "mesh-gateway"
+    #   Consumers = [{
+    #     Peer = "${var.peer_datacenter}-${var.peer_partition}"
+    #   }]
+    # }
     ]
   })
 }
