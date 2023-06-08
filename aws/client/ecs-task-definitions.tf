@@ -38,7 +38,7 @@ module "client" {
         },
         {
           name = "UPSTREAM_URIS" # Fake service upstream service to call to
-          value = "http://localhost:1234" # point all upstreams to the proxy
+          value = "http://localhost:1234,http://localhost:1235" # point all upstreams to the proxy
         }
       ]
     }
@@ -46,10 +46,14 @@ module "client" {
 
   upstreams = [
     {
+      destinationName = "test"
+      localBindPort = 1234
+    },
+    {
       destinationName = "shipping"
       destinationNamespace = "default"
-      destinationPartition = "default"
-      localBindPort = 1234
+      destinationPartition = "azure-default"
+      localBindPort = 1235
       meshGateway = {
         mode = "local"
       }
