@@ -44,7 +44,7 @@ resource "consul_config_entry" "exported_services" {
       Name = "tea-catalog"
       Namespace = "default"
       Consumers = [{
-        Partition = "${var.peer_partition}"
+        Partition = "${var.peer_datacenter}-${var.peer_partition}"
       }
       ]
       },
@@ -52,7 +52,7 @@ resource "consul_config_entry" "exported_services" {
         Name = "tea-customers"
         Namespace = "default"
         Consumers = [{
-          Partition = "${var.peer_partition}"
+          Partition = "${var.peer_datacenter}-${var.peer_partition}"
         }
       ]
       },
@@ -60,7 +60,7 @@ resource "consul_config_entry" "exported_services" {
         Name = "shipping"
         Namespace = "default"
         Consumers = [{
-          Partition = "${var.peer_partition}"
+          Partition = "${var.peer_datacenter}-${var.peer_partition}"
         }
         ]
     }]
