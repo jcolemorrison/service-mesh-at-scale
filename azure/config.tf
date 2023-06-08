@@ -40,14 +40,14 @@ resource "consul_config_entry" "exported_services" {
   })
 }
 
-resource "consul_config_entry" "loyalty_intention" {
+resource "consul_config_entry" "shipping_intention" {
   name = "shipping"
   kind = "service-intentions"
 
   config_json = jsonencode({
     Sources = [{
-    Name = "loyalty"
-    Peer = "gcp"
+    Name = "client"
+    Peer = "aws-default"
     Action = "allow"
     }]
   })

@@ -2,7 +2,7 @@ Kind =  "service-intentions"
 Name = "shipping"  
 Sources = [
   {
-    Name =  "test"            # string
+    Name =  "client"            # string
     Peer =  "aws-default"     # string
     Action = "allow"          # string
   }

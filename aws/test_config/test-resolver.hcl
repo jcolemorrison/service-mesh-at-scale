@@ -1,5 +1,5 @@
 Kind      = "service-resolver"                                     ## required
-Name      = "test"
+Name      = "shipping-azure"
 Namespace = "default" 
 Partition = "default"
 
