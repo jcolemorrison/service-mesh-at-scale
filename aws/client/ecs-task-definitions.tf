@@ -44,29 +44,29 @@ module "client" {
     }
   ]
 
-  # upstreams = [
-  #   {
-  #     destinationName = "loyalty"
-  #     destinationNamespace = "default"
-  #     destinationPartition = "default"
-  #     localBindPort = 1234
-  #     meshGateway = {
-  #       mode = "local"
-  #     }
-  #   }
-  # ]
-
   upstreams = [
     {
-      destinationName = "test"
-      # destinationNamespace = "default"
-      # destinationPartition = "default"
+      destinationName = "shipping"
+      destinationNamespace = "default"
+      destinationPartition = "default"
       localBindPort = 1234
-      # meshGateway = {
-      #   mode = "local"
-      # }
+      meshGateway = {
+        mode = "local"
+      }
     }
   ]
+
+  # upstreams = [
+  #   {
+  #     destinationName = "test"
+  #     # destinationNamespace = "default"
+  #     # destinationPartition = "default"
+  #     localBindPort = 1234
+  #     # meshGateway = {
+  #     #   mode = "local"
+  #     # }
+  #   }
+  # ]
 
   # meshGateway = {
   #   mode = "local"
