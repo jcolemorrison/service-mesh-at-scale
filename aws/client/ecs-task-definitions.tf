@@ -34,7 +34,7 @@ module "client" {
         },
         {
           name = "MESSAGE" # Fake Service message to return
-          value = "Hello from the client!"
+          value = "Hello from the client"
         },
         {
           name = "UPSTREAM_URIS" # Fake service upstream service to call to
