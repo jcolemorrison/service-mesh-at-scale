@@ -29,7 +29,7 @@ module "consul_acl_controller" {
 module "mesh_gateway" {
   source  = "hashicorp/consul-ecs/aws//modules/gateway-task"
   version = "0.6.0"
-  family = "${local.project_tag}-mgw"
+  family = "aws-mesh-gateway"
   ecs_cluster_arn = aws_ecs_cluster.main.arn
 
   subnets = aws_subnet.private.*.id # where the mesh gateway exists
@@ -61,7 +61,7 @@ module "mesh_gateway" {
 
 # User Facing Client Service
 resource "aws_ecs_service" "client" {
-  name = "${local.project_tag}-client"
+  name = "client"
   cluster = aws_ecs_cluster.main.arn
   task_definition = module.client.task_definition_arn
   desired_count = 1
@@ -89,24 +89,24 @@ resource "aws_ecs_service" "client" {
 }
 
 # User Facing Test Service
-# resource "aws_ecs_service" "test" {
-#   name = "${local.project_tag}-test"
-#   cluster = aws_ecs_cluster.main.arn
-#   task_definition = module.test.task_definition_arn
-#   desired_count = 1
-#   launch_type = "FARGATE"
+resource "aws_ecs_service" "test" {
+  name = "test"
+  cluster = aws_ecs_cluster.main.arn
+  task_definition = module.test.task_definition_arn
+  desired_count = 1
+  launch_type = "FARGATE"
 
-#   # this is only required if a service linked role for ECS isn't present in your account
-#   # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
-#   # iam_role = aws_iam_role.service_linked_ecs_role.arn
+  # this is only required if a service linked role for ECS isn't present in your account
+  # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+  # iam_role = aws_iam_role.service_linked_ecs_role.arn
 
-#   network_configuration {
-#     subnets = aws_subnet.private.*.id
-#     # defaults to the default VPC security group which allows all traffic from itself and all outbound traffic
-#     # instead, we define our own for each ECS service!
-#     security_groups = [aws_security_group.ecs_client_service.id, aws_security_group.consul_client.id]
-#     assign_public_ip = false
-#   }
+  network_configuration {
+    subnets = aws_subnet.private.*.id
+    # defaults to the default VPC security group which allows all traffic from itself and all outbound traffic
+    # instead, we define our own for each ECS service!
+    security_groups = [aws_security_group.ecs_client_service.id, aws_security_group.consul_client.id]
+    assign_public_ip = false
+  }
 
-#   propagate_tags = "TASK_DEFINITION"
-# }
+  propagate_tags = "TASK_DEFINITION"
+}
