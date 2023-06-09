@@ -22,6 +22,18 @@ resource "consul_config_entry" "loyalty" {
   })
 }
 
+resource "consul_config_entry" "coffee_catalog" {
+  kind = "service-resolver"
+  name = "coffee-catalog"
+
+  config_json = jsonencode({
+    Redirect = {
+      Service = "coffee-catalog"
+      Peer = "gcp-default"
+    }
+  })
+}
+
 resource "consul_config_entry" "client_to_catalog" {
   kind = "service-intentions"
   name = "catalog"
