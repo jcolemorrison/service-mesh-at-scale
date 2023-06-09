@@ -22,37 +22,37 @@ resource "consul_config_entry" "loyalty" {
   })
 }
 
-resource "consul_config_entry" "catalog" {
-  kind = "service-resolver"
-  name = "catalog" # name of service
-  namespace = "default"
-  partition = "default"
+# resource "consul_config_entry" "catalog" {
+#   kind = "service-resolver"
+#   name = "catalog" # name of service
+#   namespace = "default"
+#   partition = "default"
 
-  config_json = jsonencode({
-    Redirect = {
-      Service = "catalog"
-      # Peer = "aws-catalog"
-      Namespace = "default"
-      Partition = "catalog"
-    }
-  })
-}
+#   config_json = jsonencode({
+#     Redirect = {
+#       Service = "catalog"
+#       # Peer = "aws-catalog"
+#       Namespace = "default"
+#       Partition = "catalog"
+#     }
+#   })
+# }
 
-resource "consul_config_entry" "catalog_intention" {
-  kind = "service-intentions"
-  name = "catalog"
-  partition = "catalog"
+# resource "consul_config_entry" "catalog_intention" {
+#   kind = "service-intentions"
+#   name = "catalog"
+#   partition = "catalog"
 
-  config_json = jsonencode({
-    Sources = [{
-      Name = "client"
-      # Peer = "aws-default"
-      Action = "allow"
-      Partition = "default"
-      Namespace = "default"
-    }]
-  })
-}
+#   config_json = jsonencode({
+#     Sources = [{
+#       Name = "client"
+#       # Peer = "aws-default"
+#       Action = "allow"
+#       Partition = "default"
+#       Namespace = "default"
+#     }]
+#   })
+# }
 
 resource "consul_config_entry" "exported_catalog_services" {
   name = "catalog"
@@ -64,7 +64,8 @@ resource "consul_config_entry" "exported_catalog_services" {
       Name = "*"
       Namespace = "*"
       Consumers = [{
-        Peer = "aws-default"
+        Partition = "default"
+        # Peer = "aws-default"
       }]
     }]
   })
