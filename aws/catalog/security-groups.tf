@@ -90,16 +90,6 @@ resource "aws_security_group" "ecs_catalog_service" {
   vpc_id = aws_vpc.main.id
 }
 
-resource "aws_security_group_rule" "ecs_catalog_service_allow_9090" {
-  security_group_id = aws_security_group.ecs_catalog_service.id
-  type              = "ingress"
-  protocol          = "tcp"
-  from_port         = 9090
-  to_port           = 9090
-  source_security_group_id = aws_security_group.catalog_alb.id
-  description       = "Allow incoming traffic from the catalog ALB into the service container port."
-}
-
 resource "aws_security_group_rule" "ecs_catalog_service_allow_inbound_self" {
   security_group_id = aws_security_group.ecs_catalog_service.id
   type = "ingress"
