@@ -24,7 +24,9 @@ resource "consul_config_entry" "loyalty" {
 
 resource "consul_config_entry" "catalog" {
   kind = "service-resolver"
-  name = "catalog-aws"
+  name = "client" # name of service
+  namespace = "default"
+  partition = "default"
 
   config_json = jsonencode({
     Redirect = {
