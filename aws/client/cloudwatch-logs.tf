@@ -26,6 +26,14 @@ resource "aws_cloudwatch_log_group" "customers_sidecars" {
   name_prefix = "${local.project_tag}-customers-sidecars-"
 }
 
+resource "aws_cloudwatch_log_group" "orders" {
+  name_prefix = "${local.project_tag}-orders-"
+}
+
+resource "aws_cloudwatch_log_group" "orders_sidecars" {
+  name_prefix = "${local.project_tag}-orders-sidecars-"
+}
+
 resource "aws_cloudwatch_log_group" "mesh_gateway" {
   name_prefix = "${local.project_tag}-client-sidecars-"
 }
