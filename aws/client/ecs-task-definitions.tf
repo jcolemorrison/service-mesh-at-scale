@@ -62,6 +62,9 @@ module "client" {
     {
       destinationName = "catalog"
       localBindPort = 1236
+      meshGateway = {
+        mode = "local"
+      }
     }
   ]
 
