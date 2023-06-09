@@ -38,7 +38,7 @@ module "client" {
         },
         {
           name = "UPSTREAM_URIS" # Fake service upstream service to call to
-          value = "http://localhost:1234,http://localhost:1235,http://localhost:1236" # point all upstreams to the proxy
+          value = "http://localhost:1234,http://localhost:1235,http://localhost:1236,http://localhost:1237" # point all upstreams to the proxy
         }
       ]
     }
@@ -53,17 +53,17 @@ module "client" {
         }
     },
     {
-      destinationName = "catalog"
+      destinationName = "orders"
       localBindPort = 1235
     },
     {
-      destinationName = "customers"
+      destinationName = "catalog"
       localBindPort = 1236
     },
     {
-      destinationName = "orders"
+      destinationName = "customers"
       localBindPort = 1237
-    }
+    },
   ]
 
   # All settings required by the mesh-task module
