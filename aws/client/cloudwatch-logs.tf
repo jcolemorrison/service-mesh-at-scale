@@ -87,6 +87,22 @@ locals {
       awslogs-stream-prefix = "${local.project_tag}-customers-sidecars-"
     }
   }
+  orders_logs_configuration = {
+    logDriver = "awslogs"
+    options = {
+      awslogs-group         = aws_cloudwatch_log_group.orders.name
+      awslogs-region        = var.aws_default_region
+      awslogs-stream-prefix = "${local.project_tag}-orders"
+    }
+  }
+  orders_sidecars_log_configuration = {
+    logDriver = "awslogs"
+    options = {
+      awslogs-group         = aws_cloudwatch_log_group.orders_sidecars.name
+      awslogs-region        = var.aws_default_region
+      awslogs-stream-prefix = "${local.project_tag}-orders-sidecars-"
+    }
+  }
   mesh_gateway_log_configuration = {
     logDriver = "awslogs"
     options = {

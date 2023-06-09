@@ -46,7 +46,7 @@ resource "consul_config_entry" "shipping_intention" {
 
   config_json = jsonencode({
     Sources = [{
-    Name = "client"
+    Name = "orders"
     Peer = "aws-default"
     Action = "allow"
     }]

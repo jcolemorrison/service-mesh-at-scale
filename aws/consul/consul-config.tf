@@ -100,3 +100,15 @@ resource "consul_config_entry" "client_to_customers" {
     }]
   })
 }
+
+resource "consul_config_entry" "client_to_orders" {
+  kind = "service-intentions"
+  name = "orders"
+
+  config_json = jsonencode({
+    Sources = [{
+      Name = "client"
+      Action = "allow"
+    }]
+  })
+}
