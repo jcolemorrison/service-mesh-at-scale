@@ -41,13 +41,14 @@ resource "consul_config_entry" "catalog" {
 resource "consul_config_entry" "catalog_intention" {
   kind = "service-intentions"
   name = "catalog"
+  partition = "catalog"
 
   config_json = jsonencode({
     Sources = [{
       Name = "client"
       # Peer = "aws-default"
       Action = "allow"
-      Partition = "catalog"
+      Partition = "default"
       Namespace = "default"
     }]
   })
