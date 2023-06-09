@@ -68,7 +68,7 @@ resource "kubernetes_manifest" "deployment_catalog" {
                 },
                 {
                   "name"  = "NAME"
-                  "value" = "coffee-catalog"
+                  "value" = "coffee-catalog-GCP"
                 },
                 {
                   "name"  = "MESSAGE"

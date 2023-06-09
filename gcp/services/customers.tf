@@ -68,7 +68,7 @@ resource "kubernetes_manifest" "deployment_customers" {
                 },
                 {
                   "name"  = "NAME"
-                  "value" = "coffee-customers"
+                  "value" = "coffee-customers-GCP"
                 },
                 {
                   "name"  = "MESSAGE"
