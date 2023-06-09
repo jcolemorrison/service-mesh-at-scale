@@ -29,7 +29,7 @@ module "consul_acl_controller" {
 module "mesh_gateway" {
   source  = "hashicorp/consul-ecs/aws//modules/gateway-task"
   version = "0.6.0"
-  family = "aws-catalog-mesh-gateway"
+  family = "aws-mesh-gateway"
   ecs_cluster_arn = aws_ecs_cluster.main.arn
 
   subnets = aws_subnet.private.*.id # where the mesh gateway exists
