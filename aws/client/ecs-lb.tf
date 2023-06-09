@@ -23,9 +23,9 @@ resource "aws_lb_target_group" "client_alb_targets" {
     enabled = true
     path = "/"
     healthy_threshold = 3
-    unhealthy_threshold = 5
-    timeout = 30
-    interval = 60
+    unhealthy_threshold = 10
+    timeout = 60
+    interval = 120
     protocol = "HTTP"
   }
 

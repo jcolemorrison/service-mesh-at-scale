@@ -46,9 +46,35 @@ resource "consul_config_entry" "shipping_intention" {
 
   config_json = jsonencode({
     Sources = [{
-    Name = "client"
+    Name = "orders"
     Peer = "aws-default"
     Action = "allow"
+    }]
+  })
+}
+
+resource "consul_config_entry" "tea_catalog_intention" {
+  name = "tea-catalog"
+  kind = "service-intentions"
+
+  config_json = jsonencode({
+    Sources = [{
+      Name = "catalog"
+      Peer = "aws-default"
+      Action = "allow"
+    }]
+  })
+}
+
+resource "consul_config_entry" "tea_customers_intention" {
+  name = "tea-customers"
+  kind = "service-intentions"
+
+  config_json = jsonencode({
+    Sources = [{
+      Name = "customers"
+      Peer = "aws-default"
+      Action = "allow"
     }]
   })
 }
