@@ -38,21 +38,22 @@ resource "consul_config_entry" "loyalty" {
 #   })
 # }
 
-# resource "consul_config_entry" "catalog_intention" {
-#   kind = "service-intentions"
-#   name = "catalog"
-#   partition = "catalog"
+resource "consul_config_entry" "catalog_intention" {
+  kind = "service-intentions"
+  name = "catalog"
+  partition = "catalog"
+  namespace = "default"
 
-#   config_json = jsonencode({
-#     Sources = [{
-#       Name = "client"
-#       # Peer = "aws-default"
-#       Action = "allow"
-#       Partition = "default"
-#       Namespace = "default"
-#     }]
-#   })
-# }
+  config_json = jsonencode({
+    Sources = [{
+      Name = "client"
+      # Peer = "aws-default"
+      Action = "allow"
+      Partition = "default"
+      Namespace = "default"
+    }]
+  })
+}
 
 resource "consul_config_entry" "exported_catalog_services" {
   name = "catalog"
