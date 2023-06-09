@@ -27,7 +27,9 @@ resource "consul_config_entry" "client_to_catalog" {
   name = "catalog"
 
   config_json = jsonencode({
-    Name = "client"
-    Action = "allow"
+    Sources = [{
+      Name = "client"
+      Action = "allow"
+    }]
   })
 }
