@@ -64,8 +64,7 @@ resource "consul_config_entry" "exported_catalog_services" {
       Name = "*"
       Namespace = "*"
       Consumers = [{
-        Partition = "default"
-        Peer = "aws"
+        Peer = "aws-default"
       }]
     }]
   })
