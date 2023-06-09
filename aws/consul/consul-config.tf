@@ -51,7 +51,13 @@ resource "consul_config_entry" "catalog_intention" {
       Action = "allow"
       Partition = "default"
       Namespace = "default"
-    }]
+    },
+    {
+      Name = "test"
+      Peer = "gcp-default"
+      Action = "allow"
+    }
+    ]
   })
 }
 
