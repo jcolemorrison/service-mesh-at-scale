@@ -65,3 +65,16 @@ resource "consul_config_entry" "tea_catalog_intention" {
     }]
   })
 }
+
+resource "consul_config_entry" "tea_customers_intention" {
+  name = "tea-customers"
+  kind = "service-intentions"
+
+  config_json = jsonencode({
+    Sources = [{
+      Name = "customers"
+      Peer = "aws-default"
+      Action = "allow"
+    }]
+  })
+}

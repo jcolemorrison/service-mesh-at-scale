@@ -25,6 +25,18 @@ resource "consul_config_entry" "tea_catalog" {
   })
 }
 
+resource "consul_config_entry" "tea_customers" {
+  kind = "service-resolver"
+  name = "tea-customers"
+
+  config_json = jsonencode({
+    Redirect = {
+      Service = "tea-customers"
+      Peer = "azure-default"
+    }
+  })
+}
+
 
 # GCP Service Resolvers
 resource "consul_config_entry" "loyalty" {
@@ -51,9 +63,35 @@ resource "consul_config_entry" "coffee_catalog" {
   })
 }
 
+resource "consul_config_entry" "coffee_customers" {
+  kind = "service-resolver"
+  name = "coffee-customers"
+
+  config_json = jsonencode({
+    Redirect = {
+      Service = "coffee-customers"
+      Peer = "gcp-default"
+    }
+  })
+}
+
+
+# AWS Local Intentions
 resource "consul_config_entry" "client_to_catalog" {
   kind = "service-intentions"
   name = "catalog"
+
+  config_json = jsonencode({
+    Sources = [{
+      Name = "client"
+      Action = "allow"
+    }]
+  })
+}
+
+resource "consul_config_entry" "client_to_customers" {
+  kind = "service-intentions"
+  name = "customers"
 
   config_json = jsonencode({
     Sources = [{
