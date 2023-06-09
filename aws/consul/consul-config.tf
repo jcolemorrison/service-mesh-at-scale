@@ -21,3 +21,13 @@ resource "consul_config_entry" "loyalty" {
     }
   })
 }
+
+resource "consul_config_entry" "client_to_catalog" {
+  kind = "service-intention"
+  name = "catalog"
+
+  config_json = jsonencode({
+    Name = "client"
+    Action = "allow"
+  })
+}
