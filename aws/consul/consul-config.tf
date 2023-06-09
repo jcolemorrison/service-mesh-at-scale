@@ -61,19 +61,39 @@ resource "consul_config_entry" "catalog_intention" {
   })
 }
 
+# resource "consul_config_entry" "exported_catalog_services" {
+#   name = "catalog"
+#   kind = "exported-services"
+#   partition = "catalog"
+
+#   config_json = jsonencode({
+#     Services = [{
+#       Name = "catalog"
+#       Namespace = "default"
+#       Consumers = [{
+#         Partition = "default"
+#         # Peer = "aws-default"
+#       },
+#       {
+#         Name = "catalog"
+#         Namespace = "default"
+#         Consumers = [{
+#           # Partition = "default"
+#           Peer = "gcp-default"
+#         }]
+#       }
+#       ]
+#     }]
+#   })
+# }
+
 resource "consul_config_entry" "exported_catalog_services" {
   name = "catalog"
   kind = "exported-services"
   partition = "catalog"
 
   config_json = jsonencode({
-    Services = [{
-      Name = "catalog"
-      Namespace = "default"
-      Consumers = [{
-        Partition = "default"
-        # Peer = "aws-default"
-      },
+    Services = [
       {
         Name = "catalog"
         Namespace = "default"
@@ -82,7 +102,6 @@ resource "consul_config_entry" "exported_catalog_services" {
           Peer = "gcp-default"
         }]
       }
-      ]
-    }]
+    ]
   })
 }
