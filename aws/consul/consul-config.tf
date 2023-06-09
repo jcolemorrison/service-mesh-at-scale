@@ -24,7 +24,7 @@ resource "consul_config_entry" "loyalty" {
 
 resource "consul_config_entry" "catalog" {
   kind = "service-resolver"
-  name = "client" # name of service
+  name = "catalog" # name of service
   namespace = "default"
   partition = "default"
 
