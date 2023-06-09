@@ -119,7 +119,7 @@ module "catalog" {
 
   container_definitions = [
     {
-      name = "client"
+      name = "catalog"
       image = "ghcr.io/nicholasjackson/fake-service:v0.25.2"
       cpu = 0 # take up proportional cpu
       essential = true
@@ -219,7 +219,7 @@ module "customers" {
 
   container_definitions = [
     {
-      name = "client"
+      name = "customers"
       image = "ghcr.io/nicholasjackson/fake-service:v0.25.2"
       cpu = 0 # take up proportional cpu
       essential = true
