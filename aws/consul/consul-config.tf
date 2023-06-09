@@ -61,8 +61,8 @@ resource "consul_config_entry" "exported_catalog_services" {
 
   config_json = jsonencode({
     Services = [{
-      Name = "*"
-      Namespace = "*"
+      Name = "catalog"
+      Namespace = "default"
       Consumers = [{
         Partition = "default"
         # Peer = "aws-default"
