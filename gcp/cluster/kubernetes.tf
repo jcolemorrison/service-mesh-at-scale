@@ -25,3 +25,19 @@ resource "google_container_node_pool" "primary" {
     ]
   }
 }
+
+resource "google_container_node_pool" "telemetry" {
+  name       = "${var.name}-telemetry"
+  location   = google_container_cluster.primary.location
+  cluster    = google_container_cluster.primary.name
+  node_count = 1
+
+  node_config {
+    preemptible  = false
+    machine_type = "e2-standard-4"
+
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+  }
+}
