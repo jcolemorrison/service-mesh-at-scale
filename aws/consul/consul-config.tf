@@ -5,7 +5,7 @@ resource "consul_config_entry" "shipping_azure" {
   config_json = jsonencode({
     Redirect = {
       Service = "shipping"
-      Peer = "azure-default"
+      Peer    = "azure-default"
     }
   })
 }
@@ -17,14 +17,14 @@ resource "consul_config_entry" "loyalty" {
   config_json = jsonencode({
     Redirect = {
       Service = "loyalty"
-      Peer = "gcp-default"
+      Peer    = "gcp-default"
     }
   })
 }
 
 resource "consul_config_entry" "catalog" {
-  kind = "service-resolver"
-  name = "catalog" # name of service
+  kind      = "service-resolver"
+  name      = "catalog" # name of service
   namespace = "default"
   partition = "default"
 
@@ -39,8 +39,8 @@ resource "consul_config_entry" "catalog" {
 }
 
 resource "consul_config_entry" "catalog_intention" {
-  kind = "service-intentions"
-  name = "catalog"
+  kind      = "service-intentions"
+  name      = "catalog"
   partition = "catalog"
   namespace = "default"
 
@@ -48,60 +48,47 @@ resource "consul_config_entry" "catalog_intention" {
     Sources = [{
       Name = "client"
       # Peer = "aws-default"
-      Action = "allow"
+      Action    = "allow"
       Partition = "default"
       Namespace = "default"
-    },
-    {
-      Name = "test"
-      Peer = "gcp-default"
-      Action = "allow"
-    }
+      }
     ]
   })
 }
 
-# resource "consul_config_entry" "exported_catalog_services" {
-#   name = "catalog"
-#   kind = "exported-services"
-#   partition = "catalog"
+resource "consul_acl_policy" "catalog_partition" {
+  name      = "catalog-partition-read"
+  partition = "default"
+  rules     = <<-RULE
+    partition "catalog" {
+      service_prefix "" {
+        policy = "read"
+      }
 
-#   config_json = jsonencode({
-#     Services = [{
-#       Name = "catalog"
-#       Namespace = "default"
-#       Consumers = [{
-#         Partition = "default"
-#         # Peer = "aws-default"
-#       },
-#       {
-#         Name = "catalog"
-#         Namespace = "default"
-#         Consumers = [{
-#           # Partition = "default"
-#           Peer = "gcp-default"
-#         }]
-#       }
-#       ]
-#     }]
-#   })
-# }
+      node_prefix "" {
+        policy = "read"
+      }
+
+      namespace_prefix "" {
+        policy = "read"
+      }
+    }
+  RULE
+}
 
 resource "consul_config_entry" "exported_catalog_services" {
-  name = "catalog"
-  kind = "exported-services"
+  name      = "catalog"
+  kind      = "exported-services"
   partition = "catalog"
 
   config_json = jsonencode({
-    Services = [
-      {
-        Name = "catalog"
-        Namespace = "default"
-        Consumers = [{
-          # Partition = "default"
-          Peer = "gcp-default"
-        }]
-      }
-    ]
+    Services = [{
+      Name      = "catalog"
+      Namespace = "default"
+      Consumers = [{
+        Name      = "client"
+        Partition = "default"
+      }]
+    }]
   })
 }
