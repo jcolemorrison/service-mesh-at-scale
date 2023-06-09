@@ -64,9 +64,9 @@ module "client" {
       destinationPartition = "catalog"
       destinationNamespace = "default"
       localBindPort = 1236
-      # meshGateway = {
-      #   mode = "local"
-      # }
+      meshGateway = {
+        mode = "local"
+      }
     }
   ]
 

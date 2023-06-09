@@ -165,17 +165,3 @@ resource "aws_route" "public_hcp_access" {
   destination_cidr_block = data.hcp_hvn.aws.cidr_block
   transit_gateway_id = var.transit_gateway_id
 }
-
-# Private routing table route attachment.  Any traffic destined for the HVN CIDR goes to the TGW.
-resource "aws_route" "private_catalog_access" {
-  route_table_id         = aws_route_table.private.id
-  destination_cidr_block = "10.253.0.0/20"
-  transit_gateway_id = var.transit_gateway_id
-}
-
-# Public routing table route attachment.  Any traffic destined for the HVN CIDR goes to the TGW.
-resource "aws_route" "public_hcp_access" {
-  route_table_id         = aws_route_table.public.id
-  destination_cidr_block = "10.253.0.0/20"
-  transit_gateway_id = var.transit_gateway_id
-}
