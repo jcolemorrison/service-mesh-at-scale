@@ -1,3 +1,6 @@
+# Note, the service-resolvers exist to bypass the fact that consul-ecs doesn't support a destinationPeer option
+
+# Azure Service Resolvers
 resource "consul_config_entry" "shipping_azure" {
   kind = "service-resolver"
   name = "shipping-azure"
@@ -10,6 +13,20 @@ resource "consul_config_entry" "shipping_azure" {
   })
 }
 
+resource "consul_config_entry" "tea_catalog" {
+  kind = "service-resolver"
+  name = "tea-catalog"
+
+  config_json = jsonencode({
+    Redirect = {
+      Service = "tea-catalog"
+      Peer = "azure-default"
+    }
+  })
+}
+
+
+# GCP Service Resolvers
 resource "consul_config_entry" "loyalty" {
   kind = "service-resolver"
   name = "loyalty-gcp"

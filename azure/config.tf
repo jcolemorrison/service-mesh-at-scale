@@ -52,3 +52,16 @@ resource "consul_config_entry" "shipping_intention" {
     }]
   })
 }
+
+resource "consul_config_entry" "tea_catalog_intention" {
+  name = "tea-catalog"
+  kind = "service-intentions"
+
+  config_json = jsonencode({
+    Sources = [{
+      Name = "catalog"
+      Peer = "aws-default"
+      Action = "allow"
+    }]
+  })
+}
