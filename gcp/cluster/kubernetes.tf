@@ -17,7 +17,7 @@ resource "google_container_node_pool" "primary" {
   node_count = 3
 
   node_config {
-    preemptible  = true
+    preemptible  = false
     machine_type = var.kubernetes_node_size
 
     oauth_scopes = [
