@@ -74,14 +74,14 @@ resource "consul_config_entry" "exported_catalog_services" {
         Partition = "default"
         # Peer = "aws-default"
       },
-      # {
-      #   Name = "catalog"
-      #   Namespace = "default"
-      #   Consumers = [{
-      #     # Partition = "default"
-      #     Peer = "gcp-default"
-      #   }]
-      # }
+      {
+        Name = "catalog"
+        Namespace = "default"
+        Consumers = [{
+          # Partition = "default"
+          Peer = "gcp-default"
+        }]
+      }
       ]
     }]
   })
