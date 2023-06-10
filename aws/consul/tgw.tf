@@ -35,22 +35,22 @@ resource "aws_ec2_transit_gateway" "main" {
 
 # If we have any accounts we're trying to share our transit gateway with, create RAMs
 resource "aws_ram_resource_share" "tgw" {
-  count = length(local.shared_account_principals) > 0 ? 1 : 0
-  name = "tgw"
+  count                     = length(local.shared_account_principals) > 0 ? 1 : 0
+  name                      = "tgw"
   allow_external_principals = true
-  tags = { "Name" = "${local.project_tag}-tgw-ram" }
+  tags                      = { "Name" = "${local.project_tag}-tgw-ram" }
 }
 
 # share the transit gateway
 resource "aws_ram_resource_association" "tgw" {
-  count = length(local.shared_account_principals) > 0 ? 1 : 0
-  resource_arn = aws_ec2_transit_gateway.main.arn
+  count              = length(local.shared_account_principals) > 0 ? 1 : 0
+  resource_arn       = aws_ec2_transit_gateway.main.arn
   resource_share_arn = aws_ram_resource_share.tgw[0].arn
 }
 
 # share with specified principals
 resource "aws_ram_principal_association" "tgw" {
-  count = length(local.shared_account_principals) > 0 ? length(local.shared_account_principals) : 0
-  principal = local.shared_account_principals[count.index]
+  count              = length(local.shared_account_principals) > 0 ? length(local.shared_account_principals) : 0
+  principal          = local.shared_account_principals[count.index]
   resource_share_arn = aws_ram_resource_share.tgw[0].arn
 }

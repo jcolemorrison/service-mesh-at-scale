@@ -10,7 +10,7 @@ terraform {
       version = "~> 0.59.0"
     }
     consul = {
-      source = "hashicorp/consul"
+      source  = "hashicorp/consul"
       version = "~> 2.17.0"
     }
   }

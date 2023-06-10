@@ -26,5 +26,5 @@ resource "hcp_hvn_route" "tgw" {
   hvn_route_id     = "hvn-to-tgw-${count.index}"
   destination_cidr = var.spoke_vpc_cidrs[count.index]
   target_link      = hcp_aws_transit_gateway_attachment.tgw.self_link
-  project_id = var.hcp_project_id
+  project_id       = var.hcp_project_id
 }

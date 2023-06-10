@@ -8,7 +8,7 @@ resource "consul_config_entry" "shipping_azure" {
   config_json = jsonencode({
     Redirect = {
       Service = "shipping"
-      Peer = "azure-default"
+      Peer    = "azure-default"
     }
   })
 }
@@ -20,7 +20,7 @@ resource "consul_config_entry" "tea_catalog" {
   config_json = jsonencode({
     Redirect = {
       Service = "tea-catalog"
-      Peer = "azure-default"
+      Peer    = "azure-default"
     }
   })
 }
@@ -32,7 +32,7 @@ resource "consul_config_entry" "tea_customers" {
   config_json = jsonencode({
     Redirect = {
       Service = "tea-customers"
-      Peer = "azure-default"
+      Peer    = "azure-default"
     }
   })
 }
@@ -44,9 +44,10 @@ resource "consul_config_entry" "loyalty" {
   name = "loyalty-gcp"
 
   config_json = jsonencode({
+    ConnectTimeout = "30s"
     Redirect = {
       Service = "loyalty"
-      Peer = "gcp-default"
+      Peer    = "gcp-default"
     }
   })
 }
@@ -56,9 +57,10 @@ resource "consul_config_entry" "coffee_catalog" {
   name = "coffee-catalog"
 
   config_json = jsonencode({
+    ConnectTimeout = "30s"
     Redirect = {
       Service = "coffee-catalog"
-      Peer = "gcp-default"
+      Peer    = "gcp-default"
     }
   })
 }
@@ -68,9 +70,10 @@ resource "consul_config_entry" "coffee_customers" {
   name = "coffee-customers"
 
   config_json = jsonencode({
+    ConnectTimeout = "30s"
     Redirect = {
       Service = "coffee-customers"
-      Peer = "gcp-default"
+      Peer    = "gcp-default"
     }
   })
 }
@@ -83,7 +86,7 @@ resource "consul_config_entry" "client_to_catalog" {
 
   config_json = jsonencode({
     Sources = [{
-      Name = "client"
+      Name   = "client"
       Action = "allow"
     }]
   })
@@ -95,7 +98,7 @@ resource "consul_config_entry" "client_to_customers" {
 
   config_json = jsonencode({
     Sources = [{
-      Name = "client"
+      Name   = "client"
       Action = "allow"
     }]
   })
@@ -107,7 +110,7 @@ resource "consul_config_entry" "client_to_orders" {
 
   config_json = jsonencode({
     Sources = [{
-      Name = "client"
+      Name   = "client"
       Action = "allow"
     }]
   })
