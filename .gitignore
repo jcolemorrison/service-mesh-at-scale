@@ -9,3 +9,4 @@ terraform.tfstate.backup
 azure.json
 changeme
 vm.pem
+.DS_Store
