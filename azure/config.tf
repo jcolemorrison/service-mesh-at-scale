@@ -7,9 +7,9 @@ resource "consul_config_entry" "exported_services" {
     {
       Name = "tea-catalog"
       Consumers = [{
-        Peer = "${var.peer_datacenter}-${var.peer_partition}"
+        Peer = "${var.peer_datacenter}-${var.peer_partition}" # aws-default
       },{
-          Peer = "gcp-${var.peer_partition}"
+          Peer = "gcp-${var.peer_partition}" # gcp-default
       }]
     },
     {
@@ -27,15 +27,8 @@ resource "consul_config_entry" "exported_services" {
       },
       {
         Peer = "gcp-${var.peer_partition}"
-      }
-      ]
-    },
-    # {
-    #   Name = "mesh-gateway"
-    #   Consumers = [{
-    #     Peer = "${var.peer_datacenter}-${var.peer_partition}"
-    #   }]
-    # }
+      }]
+    }
     ]
   })
 }
@@ -46,9 +39,9 @@ resource "consul_config_entry" "shipping_intention" {
 
   config_json = jsonencode({
     Sources = [{
-    Name = "orders"
-    Peer = "aws-default"
-    Action = "allow"
+      Name = "orders"
+      Peer = "aws-default"
+      Action = "allow"
     }]
   })
 }

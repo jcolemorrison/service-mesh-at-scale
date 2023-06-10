@@ -137,11 +137,9 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "main" {
   # the ids of...the subnets the transit gateway will be made available to inside of the attached VPC
   subnet_ids = aws_subnet.private.*.id
 
-  # can DNS be resolved across the transit gateway?  enabled so that load balancer DNS and service
-  # DNS can still be resolved.
+  # enabled so that load balancer DNS and service DNS can still be resolved.
   dns_support = "enable"
 
-  # across traffic in the transit gateway...though since IPv6 is public by default, is this needed?
   ipv6_support = "disable"
 
   # whether or not to both associate and propagate routes from the VPC onto the transit gateway's

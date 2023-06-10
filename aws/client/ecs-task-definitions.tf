@@ -68,15 +68,14 @@ module "client" {
 
   # All settings required by the mesh-task module
   acls = true
-  # enable_acl_token_replication = true
+  # enable_acl_token_replication = true # only required with WAN federation
   consul_http_addr             = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
 
   consul_datacenter = data.hcp_consul_cluster.aws.datacenter
   consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter # required for mesh gateways?
 
-  # really not sure how this is different from consul_server_ca_cert_arn...
-  # consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn # apparently not required on HCP
-  consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
+  # consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn # apparently not required on HCP.  This is for HTTPS api.
+  consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn # for gRPC api
 
   gossip_key_secret_arn = aws_secretsmanager_secret.consul_gossip_key.arn
 
@@ -92,7 +91,7 @@ module "client" {
 
   # Admin Partitions
   consul_partition = "default"
-  consul_namespace = "default" # hopefully puts it in the client partition's default namespace
+  consul_namespace = "default"
   consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
 
   # not 100 if this is required, but it's present in the other ecs tasks and services
@@ -168,16 +167,11 @@ module "catalog" {
 
   # All settings required by the mesh-task module
   acls = true
-  # enable_acl_token_replication = true
   consul_http_addr             = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
 
   consul_datacenter = data.hcp_consul_cluster.aws.datacenter
-  consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter # required for mesh gateways?
-
-  # really not sure how this is different from consul_server_ca_cert_arn...
-  # consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn # apparently not required on HCP
+  consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter
   consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
-
   gossip_key_secret_arn = aws_secretsmanager_secret.consul_gossip_key.arn
 
   log_configuration = local.catalog_sidecars_log_configuration
@@ -192,10 +186,9 @@ module "catalog" {
 
   # Admin Partitions
   consul_partition = "default"
-  consul_namespace = "default" # hopefully puts it in the client partition's default namespace
+  consul_namespace = "default"
   consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
 
-  # not 100 if this is required, but it's present in the other ecs tasks and services
   additional_task_role_policies = [aws_iam_policy.execute_command.arn]
 
   depends_on = [
@@ -268,14 +261,10 @@ module "customers" {
 
   # All settings required by the mesh-task module
   acls = true
-  # enable_acl_token_replication = true
   consul_http_addr             = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
 
   consul_datacenter = data.hcp_consul_cluster.aws.datacenter
-  consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter # required for mesh gateways?
-
-  # really not sure how this is different from consul_server_ca_cert_arn...
-  # consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn # apparently not required on HCP
+  consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter
   consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
 
   gossip_key_secret_arn = aws_secretsmanager_secret.consul_gossip_key.arn
@@ -292,10 +281,9 @@ module "customers" {
 
   # Admin Partitions
   consul_partition = "default"
-  consul_namespace = "default" # hopefully puts it in the client partition's default namespace
+  consul_namespace = "default"
   consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
 
-  # not 100 if this is required, but it's present in the other ecs tasks and services
   additional_task_role_policies = [aws_iam_policy.execute_command.arn]
 
   depends_on = [
@@ -361,14 +349,10 @@ module "orders" {
 
   # All settings required by the mesh-task module
   acls = true
-  # enable_acl_token_replication = true
   consul_http_addr             = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
 
   consul_datacenter = data.hcp_consul_cluster.aws.datacenter
-  consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter # required for mesh gateways?
-
-  # really not sure how this is different from consul_server_ca_cert_arn...
-  # consul_https_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn # apparently not required on HCP
+  consul_primary_datacenter = data.hcp_consul_cluster.aws.datacenter
   consul_server_ca_cert_arn = aws_secretsmanager_secret.consul_root_ca_cert.arn
 
   gossip_key_secret_arn = aws_secretsmanager_secret.consul_gossip_key.arn
@@ -385,10 +369,9 @@ module "orders" {
 
   # Admin Partitions
   consul_partition = "default"
-  consul_namespace = "default" # hopefully puts it in the client partition's default namespace
+  consul_namespace = "default"
   consul_image = "public.ecr.aws/hashicorp/consul-enterprise:1.15.2-ent"
 
-  # not 100 if this is required, but it's present in the other ecs tasks and services
   additional_task_role_policies = [aws_iam_policy.execute_command.arn]
 
   depends_on = [

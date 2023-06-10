@@ -6,7 +6,7 @@ resource "consul_config_entry" "exported_services" {
     Services = [{
       Name = "coffee-catalog"
       Consumers = [{
-        Peer = "${var.peer_datacenter}-${var.peer_partition}"
+        Peer = "${var.peer_datacenter}-${var.peer_partition}" # aws-default
       }]
       },
       {

@@ -11,7 +11,7 @@ module "consul_acl_controller" {
   subnets = aws_subnet.private.*.id
 
   consul_bootstrap_token_secret_arn = aws_secretsmanager_secret.consul_bootstrap_token.arn
-  # consul_server_ca_cert_arn         = aws_secretsmanager_secret.consul_root_ca_cert.arn # apparently not required with HCP...
+  # consul_server_ca_cert_arn         = aws_secretsmanager_secret.consul_root_ca_cert.arn # not required with HCP
   consul_server_http_addr = "${data.hcp_consul_cluster.aws.consul_private_endpoint_url}"
 
   # the ACL controller module creates the required IAM role to allow logging
@@ -102,8 +102,6 @@ resource "aws_ecs_service" "catalog" {
 
   network_configuration {
     subnets = aws_subnet.private.*.id
-    # defaults to the default VPC security group which allows all traffic from itself and all outbound traffic
-    # instead, we define our own for each ECS service!
     security_groups = [aws_security_group.ecs_client_service.id, aws_security_group.consul_client.id]
     assign_public_ip = false
   }
@@ -125,8 +123,6 @@ resource "aws_ecs_service" "customers" {
 
   network_configuration {
     subnets = aws_subnet.private.*.id
-    # defaults to the default VPC security group which allows all traffic from itself and all outbound traffic
-    # instead, we define our own for each ECS service!
     security_groups = [aws_security_group.ecs_client_service.id, aws_security_group.consul_client.id]
     assign_public_ip = false
   }
@@ -148,8 +144,6 @@ resource "aws_ecs_service" "orders" {
 
   network_configuration {
     subnets = aws_subnet.private.*.id
-    # defaults to the default VPC security group which allows all traffic from itself and all outbound traffic
-    # instead, we define our own for each ECS service!
     security_groups = [aws_security_group.ecs_client_service.id, aws_security_group.consul_client.id]
     assign_public_ip = false
   }
