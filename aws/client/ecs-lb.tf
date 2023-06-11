@@ -22,10 +22,10 @@ resource "aws_lb_target_group" "client_alb_targets" {
   health_check {
     enabled = true
     path = "/"
-    healthy_threshold = 3
+    healthy_threshold = 2
     unhealthy_threshold = 10
-    timeout = 60
-    interval = 120
+    timeout = 120
+    interval = 300
     protocol = "HTTP"
   }
 
